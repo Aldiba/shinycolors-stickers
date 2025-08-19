@@ -4,8 +4,8 @@
         "name": "hazuki_01",
         "character": "hazuki",
         "img": "hazuki_01.png",
-        "fillColor": "#3BEADF",
-        "strokeColor": "#30bbb2",
+        "fillColor": "#ffffff",
+        "strokeColor": "#6f9d9f",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -17,10 +17,10 @@
     {
         "id": "2",
         "name": "hazuki_02",
-        "character": "eto",
+        "character": "hazuki",
         "img": "hazuki_02.png",
-        "fillColor": "#79cfe8",
-        "strokeColor": "#0b8eb7",
+        "fillColor": "#ffffff",
+        "strokeColor": "#6f9d9f",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -35,7 +35,7 @@
         "character": "hinana",
         "img": "hinana_01.png",
         "fillColor": "#ffc639",
-        "strokeColor": "#ef7d04",
+        "strokeColor": "#ffffff",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -50,7 +50,7 @@
         "character": "hinana",
         "img": "hinana_02.png",
         "fillColor": "#ffc639",
-        "strokeColor": "#c61632",
+        "strokeColor": "#ffffff",
         "defaultText": {
             "text": "something",
             "x": 148,
