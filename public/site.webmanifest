@@ -1,6 +1,6 @@
 {
-    "name": "Project Sekai Stickers",
-    "short_name": "Pjsk Stickers",
+    "name": "Arcaea Stickers",
+    "short_name": "Arcaea Stickers",
     "icons": [
       {
         "src": "/android-chrome-192x192.png",
@@ -18,11 +18,11 @@
         "type": "image/png"
       }
     ],
-    "theme_color": "#cf93d9",
-    "background_color": "#121212",
+    "theme_color": "#2196f3",
+    "background_color": "#eeeeee",
     "display": "standalone",
-    "description": "Make your own Project sekai stickers!",
-    "start_url": "https://st.ayaka.one/",
+    "description": "Make your own Arcaea stickers!",
+    "start_url": "https://arcst.yurisaki.top/",
     "dir": "ltr",
     "lang": "en",
     "orientation": "portrait",
