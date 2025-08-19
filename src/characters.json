@@ -1,74 +1,77 @@
 [
     {
-        "id": "3",
-        "name": "Hazuki 01",
+        "id": "1",
+        "name": "hazuki_01",
         "character": "hazuki",
-        "img": "Hazuki/hazuki_01.png",
-        "color": "#6F9D9F",
-        "defaultText": {
-            "text": "呼呼呼",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "4",
-        "name": "Hazuki 02",
-        "character": "hazuki",
-        "img": "Hazuki/hazuki_02.png",
-        "color": "#6F9D9F",
-        "defaultText": {
-            "text": "呵呵呵♪",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "5",
-        "name": "Hinana 01",
-        "character": "hinana",
-        "img": "Hinana/hinana_01.png",
-        "color": "#FFC639",
-        "defaultText": {
-            "text": "呀哈",
-            "x": 140,
-            "y": 79,
-            "r": 2,
-            "s": 47
-        }
-    },
-    {
-        "id": "6",
-        "name": "Hinana 02",
-        "character": "hinana",
-        "img": "Hinana/hinana_02.png",
-        "color": "#FFC639",
-        "defaultText": {
-            "text": "呀哈~♡",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "8",
-        "name": "Hiori 01",
-        "character": "hiori",
-        "img": "Hiori/hiori_01.png",
-        "color": "#144384",
+        "img": "hazuki_01.png",
+        "fillColor": "#3BEADF",
+        "strokeColor": "#30bbb2",
         "defaultText": {
             "text": "something",
             "x": 148,
             "y": 58,
             "r": -2,
-            "s": 47
+            "s": 42
+        }
+    },
+    {
+        "id": "2",
+        "name": "hazuki_02",
+        "character": "eto",
+        "img": "hazuki_02.png",
+        "fillColor": "#79cfe8",
+        "strokeColor": "#0b8eb7",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "3",
+        "name": "hinana_01",
+        "character": "hinana",
+        "img": "hinana_01.png",
+        "fillColor": "#ffc639",
+        "strokeColor": "#ef7d04",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "4",
+        "name": "hinana_02",
+        "character": "hinana",
+        "img": "hinana_02.png",
+        "fillColor": "#ffc639",
+        "strokeColor": "#c61632",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "5",
+        "name": "hiori_01",
+        "character": "hiori",
+        "img": "hiori_01.png",
+        "fillColor": "#ffd5d5",
+        "strokeColor": "#f04f87",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
         }
     }
-   
-  
 ]
