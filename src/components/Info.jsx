@@ -30,18 +30,18 @@ export default function Info({ open, handleClose, config }) {
               <ListItem
                 button
                 onClick={() =>
-                  (window.location.href = "https://github.com/Rosemoe")
+                  (window.location.href = "https://github.com/Aldiba")
                 }
               >
                 <ListItemAvatar>
                   <Avatar
-                    alt="Rosemoe"
-                    src="https://avatars.githubusercontent.com/Rosemoe"
+                    alt="shinnycolors"
+                    src="https://avatars.githubusercontent.com/Aldiba"
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary="Rosemoe"
-                  secondary="for the Arcaea variant of sticker maker"
+                  primary="shinnycolors"
+                  secondary="for the Shinny Colors variant of sticker maker"
                 />
               </ListItem>
               <ListItem
@@ -59,7 +59,7 @@ export default function Info({ open, handleClose, config }) {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Xestarrrr"
-                  secondary="for the Arcaea sticker images"
+                  secondary="for the Shinny Colors sticker images"
                 />
               </ListItem>
               <ListItem
@@ -89,7 +89,7 @@ export default function Info({ open, handleClose, config }) {
                 button
                 onClick={() =>
                   (window.location.href =
-                    "https://github.com/Rosemoe/arcaea-stickers")
+                    "https://github.com/Aldiba/shinycolors-stickers")
                 }
               >
                 <ListItemAvatar>

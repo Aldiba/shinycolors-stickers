@@ -73,5 +73,260 @@
             "r": -2,
             "s": 42
         }
+    },
+    {
+        "id": "6",
+        "name": "Lagrange",
+        "character": "lagrange",
+        "img": "lagrange.png",
+        "fillColor": "#bbd7fa",
+        "strokeColor": "#4c8cdd",
+        "defaultText": {
+            "text": "BRB",
+            "x": 98,
+            "y": 66,
+            "r": -4,
+            "s": 43
+        }
+    },
+    {
+        "id": "7",
+        "name": "Luna",
+        "character": "luna",
+        "img": "luna.png",
+        "fillColor": "#c09edd",
+        "strokeColor": "#7743a3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "8",
+        "name": "Maya",
+        "character": "maya",
+        "img": "maya.png",
+        "fillColor": "#f1dece",
+        "strokeColor": "#f4cfb7",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "9",
+        "name": "Nami",
+        "character": "nami",
+        "img": "nami.png",
+        "fillColor": "#f9c2cb",
+        "strokeColor": "#f62f51",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "10",
+        "name": "Shirahime",
+        "character": "shirahime",
+        "img": "shirahime.png",
+        "fillColor": "#c3d5ff",
+        "strokeColor": "#657ae7",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "11",
+        "name": "Tairitsu 01",
+        "character": "tairitsu",
+        "img": "tairitsu.png",
+        "fillColor": "#80e8d5",
+        "strokeColor": "#329f8c",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "12",
+        "name": "Vita",
+        "character": "vita",
+        "img": "vita.png",
+        "fillColor": "#f58194",
+        "strokeColor": "#c81c38",
+        "defaultText": {
+            "text": "OK!",
+            "x": 148,
+            "y": 65,
+            "r": -1.5,
+            "s": 42
+        }
+    },
+    {
+        "id": "13",
+        "name": "Hikari 02",
+        "character": "hikari",
+        "img": "hikari2.png",
+        "fillColor": "#ffe7b5",
+        "strokeColor": "#ef7d04",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "14",
+        "name": "Tairitsu 02",
+        "character": "tairitsu",
+        "img": "tairitsu2.png",
+        "fillColor": "#80e8d5",
+        "strokeColor": "#329f8c",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "15",
+        "name": "Kanae",
+        "character": "kanae",
+        "img": "kanae.png",
+        "fillColor": "#fbd0ad",
+        "strokeColor": "#FFB87F",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "16",
+        "name": "Saya",
+        "character": "saya",
+        "img": "saya.png",
+        "fillColor": "#80e8d5",
+        "strokeColor": "#329f8c",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "17",
+        "name": "Tairitsu 03",
+        "character": "tairitsu",
+        "img": "tairitsu3.png",
+        "fillColor": "#80e8d5",
+        "strokeColor": "#329f8c",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "18",
+        "name": "Shirabe",
+        "character": "shirabe",
+        "img": "shirabe.png",
+        "fillColor": "#E5616D",
+        "strokeColor": "#974149",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "19",
+        "name": "Lethe",
+        "character": "lethe",
+        "img": "lethe.png",
+        "fillColor": "#F6D3C2",
+        "strokeColor": "#E3BAA7",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "20",
+        "name": "Insight",
+        "character": "insight",
+        "img": "insight.png",
+        "fillColor": "#C9CBEA",
+        "strokeColor": "#a8a9c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "21",
+        "name": "Aichan",
+        "character": "aichan",
+        "img": "aichan.png",
+        "fillColor": "#CDB4E8",
+        "strokeColor": "#a28fb6",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "22",
+        "name": "Nonoka",
+        "character": "nonoka",
+        "img": "nonoka.png",
+        "fillColor": "#eee1af",
+        "strokeColor": "#beb48c",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
     }
 ]

@@ -1,6 +1,6 @@
 {
-    "name": "Arcaea Stickers",
-    "short_name": "Arcaea Stickers",
+    "name": "Shinny Colors Stickers",
+    "short_name": "Shinny Colors Stickers",
     "icons": [
       {
         "src": "/android-chrome-192x192.png",
@@ -21,7 +21,7 @@
     "theme_color": "#2196f3",
     "background_color": "#eeeeee",
     "display": "standalone",
-    "description": "Make your own Arcaea stickers!",
+    "description": "Make your own Shinny Colors stickers!",
     "start_url": "https://arcst.yurisaki.top/",
     "dir": "ltr",
     "lang": "en",
