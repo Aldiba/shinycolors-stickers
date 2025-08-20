@@ -35,13 +35,13 @@ export default function Info({ open, handleClose, config }) {
               >
                 <ListItemAvatar>
                   <Avatar
-                    alt="shinnycolors"
+                    alt="shinycolors"
                     src="https://avatars.githubusercontent.com/Aldiba"
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary="shinnycolors"
-                  secondary="for the Shinny Colors variant of sticker maker"
+                  primary="shinycolors"
+                  secondary="for the shiny colors variant of sticker maker"
                 />
               </ListItem>
               <ListItem
@@ -59,7 +59,7 @@ export default function Info({ open, handleClose, config }) {
                 </ListItemAvatar>
                 <ListItemText
                   primary="Xestarrrr"
-                  secondary="for the Shinny Colors sticker images"
+                  secondary="for the shiny colors sticker images"
                 />
               </ListItem>
               <ListItem

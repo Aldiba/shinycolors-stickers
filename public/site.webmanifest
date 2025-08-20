@@ -1,6 +1,6 @@
 {
-    "name": "Shinny Colors Stickers",
-    "short_name": "Shinny Colors Stickers",
+    "name": "shiny colors Stickers",
+    "short_name": "shiny colors Stickers",
     "icons": [
       {
         "src": "/android-chrome-192x192.png",
@@ -21,7 +21,7 @@
     "theme_color": "#2196f3",
     "background_color": "#eeeeee",
     "display": "standalone",
-    "description": "Make your own Shinny Colors stickers!",
+    "description": "Make your own shiny colors stickers!",
     "start_url": "https://arcst.yurisaki.top/",
     "dir": "ltr",
     "lang": "en",
