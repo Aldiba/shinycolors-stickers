@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import "../index.css";
 
 const Canvas = (props) => {
-  const { draw, ...rest } = props;
+  const { draw, spaceSize, ...rest } = props;
   const canvasRef = useRef(null);
 
   useEffect(() => {

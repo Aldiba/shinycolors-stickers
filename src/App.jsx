@@ -8,6 +8,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Snackbar from "@mui/material/Snackbar";
+import ColorPicker from "@uiw/react-color-chrome";
+
 import Picker from "./components/Picker";
 import Info from "./components/Info";
 import getConfiguration from "./utils/config";
@@ -71,7 +73,17 @@ function App() {
   const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
   const [spaceSize, setSpaceSize] = useState(50);
   const [rotate, setRotate] = useState(characters[character].defaultText.r);
+  const [letterSpacing, setLetterSpacing] = useState(0);
+
+
+  const [fillColor, setFillcolor] = useState(characters[character].fillColor);
+  const [strokeColor, setStrokecolor] = useState(characters[character].strokeColor);
+  const [outstrokeColor, setOutStrokecolor] = useState("white");
+  const [colorStrokeSize, setColorStrokeSize] = useState(5);
+  const [whiteStrokeSize, setWhiteStrokeSize] = useState(15);
+
   const [curve, setCurve] = useState(false);
+  const [curvefactor, setCurveFactor] = useState(15);
   const [loaded, setLoaded] = useState(false);
   const img = new Image();
 
@@ -82,7 +94,10 @@ function App() {
       y: characters[character].defaultText.y,
     });
     setRotate(characters[character].defaultText.r);
+    setSpaceSize(50);
     setFontSize(characters[character].defaultText.s);
+    setStrokecolor(characters[character].strokeColor);
+    setFillcolor(characters[character].fillColor);
     setLoaded(false);
   }, [character]);
 
@@ -121,25 +136,25 @@ function App() {
       ctx.translate(position.x, position.y);
       ctx.rotate(rotate / 10);
       ctx.textAlign = "center";
-      ctx.fillStyle = characters[character].fillColor;
+      ctx.fillStyle = fillColor;
       const lines = text.split("\n");
       if (curve) {
         ctx.save();
         for (let line of lines) {
-          const lineAngle = (Math.PI * line.length) / 7;
+          const lineAngle = (Math.PI * line.length) / curvefactor;
           for (let pass = 0; pass < 2; pass++) {
             ctx.save();
             for (let i = 0; i < line.length; i++) {
-              ctx.rotate(lineAngle / line.length / 2.2);
+              ctx.rotate(lineAngle / line.length / (0.3*curvefactor));
               ctx.save();
               ctx.translate(0, -1 * fontSize * 3.5);
               if (pass === 0) {
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 15;
+                ctx.strokeStyle = outstrokeColor;
+                ctx.lineWidth = whiteStrokeSize;
                 ctx.strokeText(line[i], 0, 0);
               } else {
-                ctx.strokeStyle = characters[character].strokeColor;
-                ctx.lineWidth = 5;
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = colorStrokeSize;
                 ctx.strokeText(line[i], 0, 0);
                 ctx.fillText(line[i], 0, 0);
               }
@@ -152,18 +167,27 @@ function App() {
         ctx.restore();
       } else {
         for (let pass = 0; pass < 2; pass++) {
-          for (let i = 0, k = 0; i < lines.length; i++) {
-            if (pass === 0) {
-              ctx.strokeStyle = "white";
-              ctx.lineWidth = 15;
-              ctx.strokeText(lines[i], 0, k);
-            } else {
-              ctx.strokeStyle = characters[character].strokeColor;
-              ctx.lineWidth = 5;
-              ctx.strokeText(lines[i], 0, k);
-              ctx.fillText(lines[i], 0, k);
+          let yOffset = 0;
+          for (let line of lines) {
+            let xOffset = 0;
+            for (let i = 0; i < line.length; i++) {
+              const char = line[i];
+              // 获取字符的宽度，并加上字间距
+              const charWidth = ctx.measureText(char).width + letterSpacing;
+        
+              if (pass === 0) {
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = whiteStrokeSize;
+                ctx.strokeText(char, xOffset, yOffset);
+              } else {
+                ctx.strokeStyle = characters[character].strokeColor;
+                ctx.lineWidth = colorStrokeSize;
+                ctx.strokeText(char, xOffset, yOffset);
+                ctx.fillText(char, xOffset, yOffset);
+              }
+              xOffset += charWidth;
             }
-            k += ((spaceSize - 50) / 50 + 1) * fontSize;
+            yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
           }
         }
 
@@ -223,7 +247,7 @@ function App() {
       <div className="container">
         <div className="vertical">
           <div className="canvas">
-            <Canvas draw={draw} />
+            <Canvas draw={draw} spaceSize={spaceSize} />
           </div>
           <Slider
             value={curve ? 256 - position.y + fontSize * 3 : 256 - position.y}
@@ -233,13 +257,14 @@ function App() {
                 y: curve ? 256 + fontSize * 3 - v : 256 - v,
               })
             }
-            min={0}
+            min={-50}
             max={256}
             step={1}
             orientation="vertical"
             track={false}
             color="secondary"
           />
+          
         </div>
         <div className="horizontal">
           <Slider
@@ -252,56 +277,7 @@ function App() {
             track={false}
             color="secondary"
           />
-          <div className="settings">
-            <div>
-              <label>Rotate: </label>
-              <Slider
-                value={rotate}
-                onChange={(e, v) => setRotate(v)}
-                min={-10}
-                max={10}
-                step={0.2}
-                track={false}
-                color="secondary"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Font size: </nobr>
-              </label>
-              <Slider
-                value={fontSize}
-                onChange={(e, v) => setFontSize(v)}
-                min={10}
-                max={100}
-                step={1}
-                track={false}
-                color="secondary"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Spacing: </nobr>
-              </label>
-              <Slider
-                value={spaceSize}
-                onChange={(e, v) => setSpaceSize(v)}
-                min={0}
-                max={100}
-                step={1}
-                track={false}
-                color="secondary"
-              />
-            </div>
-            <div>
-              <label>Curve (Beta): </label>
-              <Switch
-                checked={curve}
-                onChange={(e) => setCurve(e.target.checked)}
-                color="secondary"
-              />
-            </div>
-          </div>
+
           <div className="text">
             <TextField
               label="Text"
@@ -313,6 +289,148 @@ function App() {
               onChange={(e) => setText(e.target.value)}
             />
           </div>
+
+          <div className="settings">
+            <div className="strokesize">
+              <div>
+                <label>
+                  <nobr>inner Stroke Size: </nobr>
+                </label>
+                <Slider
+                  value={colorStrokeSize}
+                  onChange={(e, v) => setColorStrokeSize(v)}
+                  min={0}
+                  max={25}
+                  step={1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+
+              <div>
+                <label>
+                  <nobr>Outer Stroke Size: </nobr>
+                </label>
+                <Slider
+                  value={whiteStrokeSize}
+                  onChange={(e, v) => setWhiteStrokeSize(v)}
+                  min={0}
+                  max={35}
+                  step={1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+            </div>
+
+            <div className="normal">
+              <div>
+                <label>Rotate: </label>
+                <Slider
+                  value={rotate}
+                  onChange={(e, v) => setRotate(v)}
+                  min={-16}
+                  max={16}
+                  step={0.1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+              <div>
+                <label>
+                  <nobr>Font size: </nobr>
+                </label>
+                <Slider
+                  value={fontSize}
+                  onChange={(e, v) => setFontSize(v)}
+                  min={5}
+                  max={100}
+                  step={1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+
+            </div>
+            <div className="linesetting">
+              <div>
+                <label>
+                  <nobr>LineSpacing: </nobr>
+                </label>
+                <Slider
+                  value={spaceSize}
+                  onChange={(e, v) => setSpaceSize(v)}
+                  min={0}
+                  max={100}
+                  step={1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+              <div>
+                <label>
+                  <nobr>LetterSpacing: </nobr>
+                </label>
+                <Slider
+                  value={letterSpacing}
+                  onChange={(e, v) => setLetterSpacing(v)}
+                  min={-10}
+                  max={50}
+                  step={1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+              <div>
+                <label>Curve (Beta): </label>
+                <Switch
+                  checked={curve}
+                  onChange={(e) => setCurve(e.target.checked)}
+                  color="secondary"
+                />
+              </div>
+              <div>
+                <label>
+                  <nobr>Curve Factor: </nobr>
+                </label>
+                <Slider
+                  value={curvefactor}
+                  onChange={(e, v) => setCurveFactor(v)}
+                  min={3}
+                  max={10}
+                  step={0.1}
+                  track={false}
+                  color="secondary"
+                />
+              </div>
+            </div>
+            
+            <div className="color-pickers-container">
+              <div className="color-picker-item">
+                <label>填充颜色:</label>
+                <ColorPicker
+                  color={fillColor}
+                  onChange={(color) => setFillcolor(color.hexa)}
+                />
+              </div>
+              <div className="color-picker-item2">
+                <label>描边颜色:</label>
+                <ColorPicker
+                  color={strokeColor}
+                  onChange={(color) => setStrokecolor(color.hexa)}
+                />
+              </div>
+              <div className="color-picker-item3">
+                <label>外描边颜色:</label>
+                <ColorPicker
+                  color={outstrokeColor}
+                  onChange={(color) => setOutStrokecolor(color.hexa)}
+                />
+              </div>
+            </div>
+
+          </div>
+          
           <div className="picker">
             <Picker setCharacter={setCharacter} />
           </div>
@@ -331,6 +449,7 @@ function App() {
           </Button>
         </div>
       </div>
+
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={openCopySnackbar}

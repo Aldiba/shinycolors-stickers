@@ -30,56 +30,39 @@ export default function Info({ open, handleClose, config }) {
               <ListItem
                 button
                 onClick={() =>
+                  (window.location.href = "https://github.com/TheOriginalAyaka")
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar
+                    alt="TheOriginalAyaka"
+                    src="https://avatars.githubusercontent.com/TheOriginalAyaka"
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary="TheOriginalAyaka"
+                  secondary="creator of sekai-stickers"
+                />
+              </ListItem>
+
+              <ListItem
+                button
+                onClick={() =>
                   (window.location.href = "https://github.com/Aldiba")
                 }
               >
                 <ListItemAvatar>
                   <Avatar
-                    alt="shinycolors"
+                    alt="Aldiba"
                     src="https://avatars.githubusercontent.com/Aldiba"
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary="shinycolors"
-                  secondary="for the shiny colors variant of sticker maker"
+                  primary="Aldiba"
+                  secondary="外星生物"
                 />
               </ListItem>
-              <ListItem
-                button
-                onClick={() =>
-                  (window.location.href =
-                    "https://x.com/Xestarrrr")
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="Contributors"
-                    src="https://pbs.twimg.com/profile_images/1829853648521723905/rnRP3FCZ_400x400.jpg"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Xestarrrr"
-                  secondary="for the shiny colors sticker images"
-                />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() =>
-                  (window.location.href =
-                    "https://github.com/TheOriginalAyaka")
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="Ayaka"
-                    src="https://avatars.githubusercontent.com/TheOriginalAyaka"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Ayaka"
-                  secondary="for the original sticker maker"
-                />
-              </ListItem>
+              
             </List>
             <Typography variant="h6" component="h3">
               You can find the source code or contribute here:

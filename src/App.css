@@ -101,6 +101,43 @@
   color: rgb(255, 255, 255);
 } */
 
+.strokesize {
+  padding: 0rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 3rem;
+  color: black;
+  font-weight: bold;
+  font-family: YurukaStd;
+}
+
+.normal {
+  
+  padding: 0rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 3rem;
+  color: black;
+  font-weight: bold;
+  font-family: YurukaStd;
+
+}
+
+.linesetting {
+  
+  padding: 0rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 3rem;
+  color: black;
+  font-weight: bold;
+  font-family: YurukaStd;
+
+}
+
 ::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
@@ -119,4 +156,16 @@
   color: black;
   font-weight: bold;
   font-family: YurukaStd;
+}
+
+.color-pickers-container {
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 2rem;
+  color: black;
+  font-weight: bold;
+  font-family: YurukaStd;
+  
 }
