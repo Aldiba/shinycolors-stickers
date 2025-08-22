@@ -175,7 +175,7 @@ function App() {
             ctx.save();
             for (let i = 0, xOffset = 0; i < lines.length; i++) {
               const line = lines[i];
-              const lineAngle = (Math.PI * line.length) / curvefactor;
+              // const lineAngle = (Math.PI * line.length) / curvefactor;
               let yOffset = 0;
               ctx.save();
               ctx.translate(xOffset, 0); // 移动到新的列位置
