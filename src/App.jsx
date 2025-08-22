@@ -82,7 +82,7 @@ function App() {
   const [colorStrokeSize, setColorStrokeSize] = useState(5);
   const [whiteStrokeSize, setWhiteStrokeSize] = useState(15);
 
-  const [vertical, setVertical] = useState(false);
+  const [vertical_bool, setVertical] = useState(false);
 
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(15);
@@ -141,60 +141,131 @@ function App() {
       ctx.fillStyle = fillColor;
       const lines = text.split("\n");
       if (curve) {
-        ctx.save();
-        for (let line of lines) {
-          const lineAngle = (Math.PI * line.length) / curvefactor;
-          for (let pass = 0; pass < 2; pass++) {
-            ctx.save();
-            for (let i = 0; i < line.length; i++) {
-              ctx.rotate(lineAngle / line.length / (0.3*curvefactor));
+        if (!vertical_bool) {
+          ctx.save();
+          for (let line of lines) {
+            const lineAngle = (Math.PI * line.length) / curvefactor;
+            for (let pass = 0; pass < 2; pass++) {
               ctx.save();
-              ctx.translate(0, -1 * fontSize * 3.5);
-              if (pass === 0) {
-                ctx.strokeStyle = outstrokeColor;
-                ctx.lineWidth = whiteStrokeSize;
-                ctx.strokeText(line[i], 0, 0);
-              } else {
-                ctx.strokeStyle = strokeColor;
-                ctx.lineWidth = colorStrokeSize;
-                ctx.strokeText(line[i], 0, 0);
-                ctx.fillText(line[i], 0, 0);
+              for (let i = 0; i < line.length; i++) {
+                ctx.rotate(lineAngle / line.length / (0.3*curvefactor));
+                ctx.save();
+                ctx.translate(0, -1 * fontSize * 3.5);
+                if (pass === 0) {
+                  ctx.strokeStyle = outstrokeColor;
+                  ctx.lineWidth = whiteStrokeSize;
+                  ctx.strokeText(line[i], 0, 0);
+                } else {
+                  ctx.strokeStyle = strokeColor;
+                  ctx.lineWidth = colorStrokeSize;
+                  ctx.strokeText(line[i], 0, 0);
+                  ctx.fillText(line[i], 0, 0);
+                }
+                ctx.restore();
               }
               ctx.restore();
             }
+            ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
+          }
+          ctx.restore();
+        }
+        else {
+
+          for (let pass = 0; pass < 2; pass++) {
+            ctx.save();
+            for (let i = 0, xOffset = 0; i < lines.length; i++) {
+              const line = lines[i];
+              const lineAngle = (Math.PI * line.length) / curvefactor;
+              let yOffset = 0;
+              ctx.save();
+              ctx.translate(xOffset, 0); // 移动到新的列位置
+              for (let j = 0; j < line.length; j++) {
+                const char = line[j];
+                ctx.save();
+                // 旋转角度
+                const charAngle = (Math.PI / 180) * j * ((curvefactor-6)*10); 
+                ctx.rotate(charAngle);
+      
+                // 绘制文字
+                if (pass === 0) {
+                  ctx.strokeStyle = outstrokeColor;
+                  ctx.lineWidth = whiteStrokeSize;
+                  ctx.strokeText(char, 0, yOffset);
+                } else {
+                  ctx.strokeStyle = strokeColor;
+                  ctx.lineWidth = colorStrokeSize;
+                  ctx.strokeText(char, 0, yOffset);
+                  ctx.fillText(char, 0, yOffset);
+                }
+                ctx.restore();
+                yOffset += fontSize + letterSpacing; // 垂直移动到下一个字符位置
+              }
+              ctx.restore();
+              xOffset += ((spaceSize - 50) / 50 + 1) * fontSize; // 移动到下一列
+            }
             ctx.restore();
           }
-          ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
         }
-        ctx.restore();
-      } else {
-        for (let pass = 0; pass < 2; pass++) {
-          let yOffset = 0;
-          for (let line of lines) {
+      } 
+      else{
+        if (vertical_bool) {
+          // 竖排模式的绘制逻辑
+          for (let pass = 0; pass < 2; pass++) {
             let xOffset = 0;
-            for (let i = 0; i < line.length; i++) {
-              const char = line[i];
-              // 获取字符的宽度，并加上字间距
-              const charWidth = ctx.measureText(char).width + letterSpacing;
-        
-              if (pass === 0) {
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = whiteStrokeSize;
-                ctx.strokeText(char, xOffset, yOffset);
-              } else {
-                ctx.strokeStyle = characters[character].strokeColor;
-                ctx.lineWidth = colorStrokeSize;
-                ctx.strokeText(char, xOffset, yOffset);
-                ctx.fillText(char, xOffset, yOffset);
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i];
+              let yOffset = 0;
+              for (let j = 0; j < line.length; j++) {
+                const char = line[j];
+                // 获取字符的宽度，并加上字间距
+                // const charWidth = ctx.measureText(char).width + letterSpacing;
+                if (pass === 0) {
+                  ctx.strokeStyle = "white";
+                  ctx.lineWidth = whiteStrokeSize;
+                  ctx.strokeText(char, xOffset, yOffset);
+                } else {
+                  ctx.strokeStyle = characters[character].strokeColor;
+                  ctx.lineWidth = colorStrokeSize;
+                  ctx.strokeText(char, xOffset, yOffset);
+                  ctx.fillText(char, xOffset, yOffset);
+                }
+                yOffset += fontSize + letterSpacing; // 调整字间距
               }
-              xOffset += charWidth;
+              xOffset += ((spaceSize - 50) / 50 + 1) * fontSize; // 调整列间距
             }
-            yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
           }
+          ctx.restore();
         }
-
-        ctx.restore();
+        
+        else {
+          for (let pass = 0; pass < 2; pass++) {
+            let yOffset = 0;
+            for (let line of lines) {
+              let xOffset = 0;
+              for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                // 获取字符的宽度，并加上字间距
+                const charWidth = ctx.measureText(char).width + letterSpacing;
+          
+                if (pass === 0) {
+                  ctx.strokeStyle = "white";
+                  ctx.lineWidth = whiteStrokeSize;
+                  ctx.strokeText(char, xOffset, yOffset);
+                } else {
+                  ctx.strokeStyle = characters[character].strokeColor;
+                  ctx.lineWidth = colorStrokeSize;
+                  ctx.strokeText(char, xOffset, yOffset);
+                  ctx.fillText(char, xOffset, yOffset);
+                }
+                xOffset += charWidth;
+              }
+              yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
+            }
+          }
+          ctx.restore();
+        }
       }
+      
     }
   };
 
@@ -355,7 +426,7 @@ function App() {
               <div>
                 <label>Vertical:</label>
                 <Switch
-                  checked={vertical}
+                  checked={vertical_bool}
                   onChange={(e) => setVertical(e.target.checked)}
                   color="secondary"
                 />
@@ -384,7 +455,7 @@ function App() {
                 <Slider
                   value={letterSpacing}
                   onChange={(e, v) => setLetterSpacing(v)}
-                  min={-10}
+                  min={-20}
                   max={50}
                   step={1}
                   track={false}
@@ -413,6 +484,7 @@ function App() {
                   color="secondary"
                 />
               </div>
+
             </div>
             
             <div className="color-pickers-container">
