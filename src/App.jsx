@@ -78,9 +78,9 @@ function App() {
 
   const [fillColor, setFillcolor] = useState(characters[character].fillColor);
   const [strokeColor, setStrokecolor] = useState(characters[character].strokeColor);
-  const [outstrokeColor, setOutStrokecolor] = useState("white");
+  const [outstrokeColor, setOutStrokecolor] = useState("#000000");
   const [colorStrokeSize, setColorStrokeSize] = useState(5);
-  const [whiteStrokeSize, setWhiteStrokeSize] = useState(15);
+  const [whiteStrokeSize, setWhiteStrokeSize] = useState(10);
 
   const [vertical_bool, setVertical] = useState(false);
 
@@ -220,11 +220,11 @@ function App() {
                 // 获取字符的宽度，并加上字间距
                 // const charWidth = ctx.measureText(char).width + letterSpacing;
                 if (pass === 0) {
-                  ctx.strokeStyle = "white";
+                  ctx.strokeStyle = outstrokeColor;
                   ctx.lineWidth = whiteStrokeSize;
                   ctx.strokeText(char, xOffset, yOffset);
                 } else {
-                  ctx.strokeStyle = characters[character].strokeColor;
+                  ctx.strokeStyle = strokeColor;
                   ctx.lineWidth = colorStrokeSize;
                   ctx.strokeText(char, xOffset, yOffset);
                   ctx.fillText(char, xOffset, yOffset);
@@ -248,11 +248,11 @@ function App() {
                 const charWidth = ctx.measureText(char).width + letterSpacing;
           
                 if (pass === 0) {
-                  ctx.strokeStyle = "white";
+                  ctx.strokeStyle = outstrokeColor;
                   ctx.lineWidth = whiteStrokeSize;
                   ctx.strokeText(char, xOffset, yOffset);
                 } else {
-                  ctx.strokeStyle = characters[character].strokeColor;
+                  ctx.strokeStyle = strokeColor;
                   ctx.lineWidth = colorStrokeSize;
                   ctx.strokeText(char, xOffset, yOffset);
                   ctx.fillText(char, xOffset, yOffset);

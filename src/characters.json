@@ -76,13 +76,13 @@
     },
     {
         "id": "6",
-        "name": "Lagrange",
-        "character": "lagrange",
-        "img": "lagrange.png",
-        "fillColor": "#bbd7fa",
-        "strokeColor": "#4c8cdd",
+        "name": "toru_0",
+        "character": "toru",
+        "img": "asakuratoru-0_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
-            "text": "BRB",
+            "text": "我有五根手指",
             "x": 98,
             "y": 66,
             "r": -4,
@@ -91,11 +91,11 @@
     },
     {
         "id": "7",
-        "name": "Luna",
-        "character": "luna",
-        "img": "luna.png",
-        "fillColor": "#c09edd",
-        "strokeColor": "#7743a3",
+        "name": "toru_1",
+        "character": "toru",
+        "img": "asakuratoru-1_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -106,11 +106,11 @@
     },
     {
         "id": "8",
-        "name": "Maya",
-        "character": "maya",
-        "img": "maya.png",
-        "fillColor": "#f1dece",
-        "strokeColor": "#f4cfb7",
+        "name": "toru_2",
+        "character": "toru",
+        "img": "asakuratoru-2_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -121,11 +121,11 @@
     },
     {
         "id": "9",
-        "name": "Nami",
-        "character": "nami",
-        "img": "nami.png",
-        "fillColor": "#f9c2cb",
-        "strokeColor": "#f62f51",
+        "name": "toru_3",
+        "character": "toru",
+        "img": "asakuratoru-3_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -136,11 +136,11 @@
     },
     {
         "id": "10",
-        "name": "Shirahime",
-        "character": "shirahime",
-        "img": "shirahime.png",
-        "fillColor": "#c3d5ff",
-        "strokeColor": "#657ae7",
+        "name": "toru_4",
+        "character": "toru",
+        "img": "asakuratoru-4_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -151,11 +151,11 @@
     },
     {
         "id": "11",
-        "name": "Tairitsu 01",
-        "character": "tairitsu",
-        "img": "tairitsu.png",
-        "fillColor": "#80e8d5",
-        "strokeColor": "#329f8c",
+        "name": "toru_5",
+        "character": "toru",
+        "img": "asakuratoru-5_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -166,11 +166,11 @@
     },
     {
         "id": "12",
-        "name": "Vita",
-        "character": "vita",
-        "img": "vita.png",
-        "fillColor": "#f58194",
-        "strokeColor": "#c81c38",
+        "name": "toru_6",
+        "character": "toru",
+        "img": "asakuratoru-7_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "OK!",
             "x": 148,
@@ -181,11 +181,11 @@
     },
     {
         "id": "13",
-        "name": "Hikari 02",
-        "character": "hikari",
-        "img": "hikari2.png",
-        "fillColor": "#ffe7b5",
-        "strokeColor": "#ef7d04",
+        "name": "toru_7",
+        "character": "toru",
+        "img": "asakuratoru-8_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -196,11 +196,11 @@
     },
     {
         "id": "14",
-        "name": "Tairitsu 02",
-        "character": "tairitsu",
-        "img": "tairitsu2.png",
-        "fillColor": "#80e8d5",
-        "strokeColor": "#329f8c",
+        "name": "toru_8",
+        "character": "toru",
+        "img": "asakuratoru-10_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -211,41 +211,11 @@
     },
     {
         "id": "15",
-        "name": "Kanae",
-        "character": "kanae",
-        "img": "kanae.png",
-        "fillColor": "#fbd0ad",
-        "strokeColor": "#FFB87F",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
-        }
-    },
-    {
-        "id": "16",
-        "name": "Saya",
-        "character": "saya",
-        "img": "saya.png",
-        "fillColor": "#80e8d5",
-        "strokeColor": "#329f8c",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
-        }
-    },
-    {
-        "id": "17",
-        "name": "Tairitsu 03",
-        "character": "tairitsu",
-        "img": "tairitsu3.png",
-        "fillColor": "#80e8d5",
-        "strokeColor": "#329f8c",
+        "name": "toru_9",
+        "character": "toru",
+        "img": "asakuratoru-12_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#50d0d0",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -256,11 +226,11 @@
     },
     {
         "id": "18",
-        "name": "Shirabe",
-        "character": "shirabe",
-        "img": "shirabe.png",
-        "fillColor": "#E5616D",
-        "strokeColor": "#974149",
+        "name": "madoka_1",
+        "character": "madoka",
+        "img": "higuchimadoka-1_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -271,11 +241,11 @@
     },
     {
         "id": "19",
-        "name": "Lethe",
-        "character": "lethe",
-        "img": "lethe.png",
-        "fillColor": "#F6D3C2",
-        "strokeColor": "#E3BAA7",
+        "name": "madoka_2",
+        "character": "madoka",
+        "img": "higuchimadoka-3_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -286,11 +256,11 @@
     },
     {
         "id": "20",
-        "name": "Insight",
-        "character": "insight",
-        "img": "insight.png",
-        "fillColor": "#C9CBEA",
-        "strokeColor": "#a8a9c3",
+        "name": "madoka_3",
+        "character": "madoka",
+        "img": "higuchimadoka-4_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -301,11 +271,11 @@
     },
     {
         "id": "21",
-        "name": "Aichan",
-        "character": "aichan",
-        "img": "aichan.png",
-        "fillColor": "#CDB4E8",
-        "strokeColor": "#a28fb6",
+        "name": "madoka_4",
+        "character": "madoka",
+        "img": "higuchimadoka-5_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -316,11 +286,266 @@
     },
     {
         "id": "22",
-        "name": "Nonoka",
-        "character": "nonoka",
-        "img": "nonoka.png",
-        "fillColor": "#eee1af",
-        "strokeColor": "#beb48c",
+        "name": "madoka_5",
+        "character": "madoka",
+        "img": "higuchimadoka-6_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "23",
+        "name": "madoka_6",
+        "character": "madoka",
+        "img": "higuchimadoka-8_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "24",
+        "name": "madoka_7",
+        "character": "madoka",
+        "img": "higuchimadoka-12_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#be1e3e",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "25",
+        "name": "hinana_1",
+        "character": "hinana",
+        "img": "ichikawahinana-0_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "26",
+        "name": "hinana_2",
+        "character": "hinana",
+        "img": "ichikawahinana-1_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "27",
+        "name": "hinana_3",
+        "character": "hinana",
+        "img": "ichikawahinana-2_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "28",
+        "name": "hinana_4",
+        "character": "hinana",
+        "img": "ichikawahinana-5_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "29",
+        "name": "hinana_5",
+        "character": "hinana",
+        "img": "ichikawahinana-6_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "30",
+        "name": "hinana_6",
+        "character": "hinana",
+        "img": "ichikawahinana-7_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "31",
+        "name": "hinana_7",
+        "character": "hinana",
+        "img": "ichikawahinana-8_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "32",
+        "name": "hinana_8",
+        "character": "hinana",
+        "img": "ichikawahinana-12_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffc639",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "33",
+        "name": "koito_0",
+        "character": "koito",
+        "img": "fukumarukoito-2_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "34",
+        "name": "koito_1",
+        "character": "koito",
+        "img": "fukumarukoito-5_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "35",
+        "name": "koito_2",
+        "character": "koito",
+        "img": "fukumarukoito-6_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "36",
+        "name": "koito_3",
+        "character": "koito",
+        "img": "fukumarukoito-7_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "37",
+        "name": "koito_4",
+        "character": "koito",
+        "img": "fukumarukoito-8_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "38",
+        "name": "koito_5",
+        "character": "koito",
+        "img": "fukumarukoito-11_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "39",
+        "name": "koito_6",
+        "character": "koito",
+        "img": "fukumarukoito-12_1.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#7967c3",
         "defaultText": {
             "text": "something",
             "x": 148,
@@ -329,4 +554,5 @@
             "s": 42
         }
     }
+    
 ]
