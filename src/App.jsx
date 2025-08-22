@@ -82,6 +82,8 @@ function App() {
   const [colorStrokeSize, setColorStrokeSize] = useState(5);
   const [whiteStrokeSize, setWhiteStrokeSize] = useState(15);
 
+  const [vertical, setVertical] = useState(false);
+
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(15);
   const [loaded, setLoaded] = useState(false);
@@ -350,6 +352,14 @@ function App() {
                   color="secondary"
                 />
               </div>
+              <div>
+                <label>Vertical:</label>
+                <Switch
+                  checked={vertical}
+                  onChange={(e) => setVertical(e.target.checked)}
+                  color="secondary"
+                />
+              </div>
 
             </div>
             <div className="linesetting">
@@ -407,21 +417,21 @@ function App() {
             
             <div className="color-pickers-container">
               <div className="color-picker-item">
-                <label>填充颜色:</label>
+                <label>Fill Color:</label>
                 <ColorPicker
                   color={fillColor}
                   onChange={(color) => setFillcolor(color.hexa)}
                 />
               </div>
               <div className="color-picker-item2">
-                <label>描边颜色:</label>
+                <label>Inner Stroke Color:</label>
                 <ColorPicker
                   color={strokeColor}
                   onChange={(color) => setStrokecolor(color.hexa)}
                 />
               </div>
               <div className="color-picker-item3">
-                <label>外描边颜色:</label>
+                <label>Outer Stroke Color:</label>
                 <ColorPicker
                   color={outstrokeColor}
                   onChange={(color) => setOutStrokecolor(color.hexa)}
