@@ -64,7 +64,7 @@
         "name": "mano_01",
         "character": "mano",
         "img": "mano_01.png",
-        "fillColor": "#368ecb",
+        "fillColor": "#ffffff",
         "strokeColor": "#EF9070",
         "defaultText": {
             "text": "howaa",
@@ -111,6 +111,21 @@
         "img": "rinze_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#575E7C",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "29",
+        "name": "kogane_01",
+        "character": "kogane",
+        "img": "kogane_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#9E8683",
         "defaultText": {
             "text": "something",
             "x": 148,
