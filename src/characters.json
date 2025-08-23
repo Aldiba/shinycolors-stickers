@@ -1,5 +1,140 @@
 [
     {
+        "id": "1",
+        "name": "hazuki_01",
+        "character": "hazuki",
+        "img": "hazuki_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#4BB558",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "2",
+        "name": "hazuki_02",
+        "character": "hazuki",
+        "img": "hazuki_02.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#4BB558",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "3",
+        "name": "hazuki_03",
+        "character": "hazuki",
+        "img": "hazuki_03.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#4BB558",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "4",
+        "name": "mamimi_01",
+        "character": "mamimi",
+        "img": "mamimi_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#4A3457",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "5",
+        "name": "kiriko_01",
+        "character": "kiriko",
+        "img": "kiriko_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#B8ACB1",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "6",
+        "name": "mei_01",
+        "character": "mei",
+        "img": "mei_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#C69660",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "7",
+        "name": "sakuya_01",
+        "character": "sakuya",
+        "img": "sakuya_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#4B4047",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "8",
+        "name": "tenka_01",
+        "character": "tenka",
+        "img": "tenka_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#FF9074",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "9",
+        "name": "hiori_01",
+        "character": "hiori",
+        "img": "hiori_01.png",
+        "fillColor": "#368ecb",
+        "strokeColor": "#ffffff",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
         "id": "21",
         "name": "chiyuki_01",
         "character": "chiyuki",
@@ -135,36 +270,6 @@
         }
     },
     {
-        "id": "31",
-        "name": "hazuki_01",
-        "character": "hazuki",
-        "img": "hazuki_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#4BB558",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
-        }
-    },
-    {
-        "id": "32",
-        "name": "hazuki_02",
-        "character": "hazuki",
-        "img": "hazuki_02.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#4BB558",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
-        }
-    },
-    {
         "id": "33",
         "name": "hinana_01",
         "character": "hinana",
@@ -186,21 +291,6 @@
         "img": "hinana_02.png",
         "fillColor": "#ffffff",
         "strokeColor": "#F45015",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
-        }
-    },
-    {
-        "id": "35",
-        "name": "hiori_01",
-        "character": "hiori",
-        "img": "hiori_01.png",
-        "fillColor": "#368ecb",
-        "strokeColor": "#ffffff",
         "defaultText": {
             "text": "something",
             "x": 148,
