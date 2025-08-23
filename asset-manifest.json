@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/shinycolors-stickers/static/css/main.df586990.css",
-    "main.js": "/shinycolors-stickers/static/js/main.e81df212.js",
+    "main.js": "/shinycolors-stickers/static/js/main.ce92d9ce.js",
     "static/media/YurukaStd.woff2": "/shinycolors-stickers/static/media/YurukaStd.e4589185c34a94a462b4.woff2",
     "static/media/ShangShouFangTangTi.woff2": "/shinycolors-stickers/static/media/ShangShouFangTangTi.86f6651bda19f72a48d3.woff2",
     "index.html": "/shinycolors-stickers/index.html",
     "main.df586990.css.map": "/shinycolors-stickers/static/css/main.df586990.css.map",
-    "main.e81df212.js.map": "/shinycolors-stickers/static/js/main.e81df212.js.map"
+    "main.ce92d9ce.js.map": "/shinycolors-stickers/static/js/main.ce92d9ce.js.map"
   },
   "entrypoints": [
     "static/css/main.df586990.css",
-    "static/js/main.e81df212.js"
+    "static/js/main.ce92d9ce.js"
   ]
 }
