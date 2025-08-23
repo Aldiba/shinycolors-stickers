@@ -51,8 +51,8 @@ export default function Picker({ setCharacter }) {
             }}
           >
             <img
-              src={`/img/${c.img}`}
-              srcSet={`/img/${c.img}`}
+              src={`img/${c.img}`}
+              srcSet={`img/${c.img}`}
               alt={c.name}
               loading="lazy"
             />

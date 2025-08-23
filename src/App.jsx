@@ -87,7 +87,20 @@ function App() {
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(15);
   const [loaded, setLoaded] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
   const img = new Image();
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // 文件加载完成后，将结果设置为image状态
+        setUploadedImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   useEffect(() => {
     setText(characters[character].defaultText.text);
@@ -103,7 +116,7 @@ function App() {
     setLoaded(false);
   }, [character]);
 
-  img.src = "/img/" + characters[character].img;
+  img.src = "img/" + characters[character].img;
 
   img.onload = () => {
     setLoaded(true);
@@ -272,7 +285,7 @@ function App() {
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_arcst.yurisaki.top.png`;
+    link.download = `${characters[character].name}_stickers.png`;
     link.href = canvas.toDataURL();
     link.style.display = "none";
     document.body.appendChild(link);
@@ -515,6 +528,11 @@ function App() {
           
           <div className="picker">
             <Picker setCharacter={setCharacter} />
+          </div>
+          <div className="uploader">
+            <Button color="secondary" onClick={handleImageUpload}>
+            Upload
+            </Button>
           </div>
           <div className="buttons">
             <Button color="secondary" onClick={copy}>
