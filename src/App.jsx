@@ -176,6 +176,7 @@ function App() {
       ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
     }
   };
+  
 
   // 竖向曲线文本
   const drawCurvedVerticalText = (ctx) => {
@@ -189,7 +190,7 @@ function App() {
         ctx.translate(xOffset, 0);
         for (let j = 0; j < line.length; j++) {
           const char = line[j];
-          const charAngle = (Math.PI / 180) * j * ((curvefactor - 6) * 10);
+          const charAngle = (Math.PI / 180) * j * ((curvefactor - 6) * 3);
           ctx.rotate(charAngle);
           drawStrokeAndFill(ctx, char, 0, yOffset, pass);
           yOffset += fontSize + letterSpacing;
@@ -237,7 +238,9 @@ function App() {
       // 根据配置调用不同的绘制函数
       if (curve) {
         if (vertical_bool) {
+          
           drawCurvedVerticalText(ctx);
+          // ctx.translate(0, fontSize * 3);
         } else {
           drawCurvedHorizontalText(ctx);
         }
@@ -308,11 +311,11 @@ function App() {
             <Canvas draw={draw} spaceSize={spaceSize} />
           </div>
           <Slider
-            value={curve ? 256 - position.y + fontSize * 3 : 256 - position.y}
+            value={curve && !vertical_bool ? 256 - position.y + fontSize * 3 : 256 - position.y}
             onChange={(e, v) =>
               setPosition({
                 ...position,
-                y: curve ? 256 + fontSize * 3 - v : 256 - v,
+                y: curve && !vertical_bool ? 256 + fontSize * 3 - v : 256 - v,
               })
             }
             min={-50}
