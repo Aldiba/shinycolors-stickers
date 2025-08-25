@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/shinycolors-stickers/static/css/main.df586990.css",
-    "main.js": "/shinycolors-stickers/static/js/main.f31b5d89.js",
+    "main.css": "/shinycolors-stickers/static/css/main.245c5945.css",
+    "main.js": "/shinycolors-stickers/static/js/main.e937c90b.js",
     "static/media/YurukaStd.woff2": "/shinycolors-stickers/static/media/YurukaStd.e4589185c34a94a462b4.woff2",
     "static/media/ShangShouFangTangTi.woff2": "/shinycolors-stickers/static/media/ShangShouFangTangTi.86f6651bda19f72a48d3.woff2",
     "index.html": "/shinycolors-stickers/index.html",
-    "main.df586990.css.map": "/shinycolors-stickers/static/css/main.df586990.css.map",
-    "main.f31b5d89.js.map": "/shinycolors-stickers/static/js/main.f31b5d89.js.map"
+    "main.245c5945.css.map": "/shinycolors-stickers/static/css/main.245c5945.css.map",
+    "main.e937c90b.js.map": "/shinycolors-stickers/static/js/main.e937c90b.js.map"
   },
   "entrypoints": [
-    "static/css/main.df586990.css",
-    "static/js/main.f31b5d89.js"
+    "static/css/main.245c5945.css",
+    "static/js/main.e937c90b.js"
   ]
 }
