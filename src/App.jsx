@@ -64,7 +64,7 @@ function App() {
     setOpenCopySnackbar(false);
   };
 
-  const [character, setCharacter] = useState(5);
+  const [character, setCharacter] = useState(26);
   const [text, setText] = useState(characters[character].defaultText.text);
   const [position, setPosition] = useState({
     x: characters[character].defaultText.x,
