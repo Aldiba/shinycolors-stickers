@@ -135,6 +135,81 @@
         }
     },
     {
+        "id": "10",
+        "name": "hiori_02",
+        "character": "hiori",
+        "img": "hiori_02.png",
+        "fillColor": "#368ecb",
+        "strokeColor": "#ffffff",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "11",
+        "name": "meguru_01",
+        "character": "meguru",
+        "img": "meguru_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#B9515B",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "12",
+        "name": "meguru_02",
+        "character": "meguru",
+        "img": "meguru_02.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#B9515B",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "13",
+        "name": "natsuha_01",
+        "character": "natsuha",
+        "img": "natsuha_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#EC917F",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
+        "id": "14",
+        "name": "yuika_01",
+        "character": "yuika",
+        "img": "yuika_01.png",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffd811",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
+    },
+    {
         "id": "21",
         "name": "chiyuki_01",
         "character": "chiyuki",
@@ -222,21 +297,6 @@
             "y": 66,
             "r": -4,
             "s": 43
-        }
-    },
-    {
-        "id": "27",
-        "name": "meguru_01",
-        "character": "meguru",
-        "img": "meguru_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#B9515B",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 42
         }
     },
     {

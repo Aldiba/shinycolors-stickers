@@ -87,20 +87,8 @@ function App() {
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(15);
   const [loaded, setLoaded] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState(null);
   const img = new Image();
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        // 文件加载完成后，将结果设置为image状态
-        setUploadedImage(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   useEffect(() => {
     setText(characters[character].defaultText.text);
@@ -122,11 +110,103 @@ function App() {
     setLoaded(true);
   };
 
+  // 辅助函数：绘制描边和填充文本
+  const drawStrokeAndFill = (ctx, char, x, y, pass) => {
+    if (pass === 0) {
+      ctx.strokeStyle = outstrokeColor;
+      ctx.lineWidth = whiteStrokeSize;
+      ctx.strokeText(char, x, y);
+    } else {
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = colorStrokeSize;
+      ctx.strokeText(char, x, y);
+      ctx.fillText(char, x, y);
+    }
+  };
+
+  // 横向文本
+  const drawHorizontalText = (ctx) => {
+    const lines = text.split("\n");
+    for (let pass = 0; pass < 2; pass++) {
+      let yOffset = 0;
+      for (const line of lines) {
+        let xOffset = 0;
+        for (const char of line) {
+          const charWidth = ctx.measureText(char).width + letterSpacing;
+          drawStrokeAndFill(ctx, char, xOffset, yOffset, pass);
+          xOffset += charWidth;
+        }
+        yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
+      }
+    }
+  };
+
+  // 竖向文本
+  const drawVerticalText = (ctx) => {
+    const lines = text.split("\n");
+    for (let pass = 0; pass < 2; pass++) {
+      let xOffset = 0;
+      for (const line of lines) {
+        let yOffset = 0;
+        for (const char of line) {
+          drawStrokeAndFill(ctx, char, xOffset, yOffset, pass);
+          yOffset += fontSize + letterSpacing;
+        }
+        xOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
+      }
+    }
+  };
+
+  // 横向曲线文本
+  const drawCurvedHorizontalText = (ctx) => {
+    const lines = text.split("\n");
+    for (const line of lines) {
+      const lineAngle = (Math.PI * line.length) / curvefactor;
+      for (let pass = 0; pass < 2; pass++) {
+        ctx.save();
+        for (const char of line) {
+          ctx.rotate(lineAngle / line.length / (0.3 * curvefactor));
+          ctx.save();
+          ctx.translate(0, -1 * fontSize * 3.5);
+          drawStrokeAndFill(ctx, char, 0, 0, pass);
+          ctx.restore();
+        }
+        ctx.restore();
+      }
+      ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
+    }
+  };
+
+  // 竖向曲线文本
+  const drawCurvedVerticalText = (ctx) => {
+    const lines = text.split("\n");
+    for (let pass = 0; pass < 2; pass++) {
+      ctx.save();
+      let xOffset = 0;
+      for (const line of lines) {
+        let yOffset = 0;
+        ctx.save();
+        ctx.translate(xOffset, 0);
+        for (let j = 0; j < line.length; j++) {
+          const char = line[j];
+          const charAngle = (Math.PI / 180) * j * ((curvefactor - 6) * 10);
+          ctx.rotate(charAngle);
+          drawStrokeAndFill(ctx, char, 0, yOffset, pass);
+          yOffset += fontSize + letterSpacing;
+        }
+        ctx.restore();
+        xOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
+      }
+      ctx.restore();
+    }
+  };
+
   const draw = (ctx) => {
     ctx.canvas.width = 296;
     ctx.canvas.height = 256;
 
     if (loaded && document.fonts.check("12px YurukaStd")) {
+      // 绘制背景图片
       const hRatio = ctx.canvas.width / img.width;
       const vRatio = ctx.canvas.height / img.height;
       const ratio = Math.min(hRatio, vRatio);
@@ -144,143 +224,35 @@ function App() {
         img.width * ratio,
         img.height * ratio
       );
+
+      // 设置通用文本样式
       ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
       ctx.miterLimit = 2.5;
       ctx.save();
-
       ctx.translate(position.x, position.y);
       ctx.rotate(rotate / 10);
       ctx.textAlign = "center";
       ctx.fillStyle = fillColor;
-      const lines = text.split("\n");
-      if (curve) {
-        if (!vertical_bool) {
-          ctx.save();
-          for (let line of lines) {
-            const lineAngle = (Math.PI * line.length) / curvefactor;
-            for (let pass = 0; pass < 2; pass++) {
-              ctx.save();
-              for (let i = 0; i < line.length; i++) {
-                ctx.rotate(lineAngle / line.length / (0.3*curvefactor));
-                ctx.save();
-                ctx.translate(0, -1 * fontSize * 3.5);
-                if (pass === 0) {
-                  ctx.strokeStyle = outstrokeColor;
-                  ctx.lineWidth = whiteStrokeSize;
-                  ctx.strokeText(line[i], 0, 0);
-                } else {
-                  ctx.strokeStyle = strokeColor;
-                  ctx.lineWidth = colorStrokeSize;
-                  ctx.strokeText(line[i], 0, 0);
-                  ctx.fillText(line[i], 0, 0);
-                }
-                ctx.restore();
-              }
-              ctx.restore();
-            }
-            ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
-          }
-          ctx.restore();
-        }
-        else {
 
-          for (let pass = 0; pass < 2; pass++) {
-            ctx.save();
-            for (let i = 0, xOffset = 0; i < lines.length; i++) {
-              const line = lines[i];
-              // const lineAngle = (Math.PI * line.length) / curvefactor;
-              let yOffset = 0;
-              ctx.save();
-              ctx.translate(xOffset, 0); // 移动到新的列位置
-              for (let j = 0; j < line.length; j++) {
-                const char = line[j];
-                ctx.save();
-                // 旋转角度
-                const charAngle = (Math.PI / 180) * j * ((curvefactor-6)*10); 
-                ctx.rotate(charAngle);
-      
-                // 绘制文字
-                if (pass === 0) {
-                  ctx.strokeStyle = outstrokeColor;
-                  ctx.lineWidth = whiteStrokeSize;
-                  ctx.strokeText(char, 0, yOffset);
-                } else {
-                  ctx.strokeStyle = strokeColor;
-                  ctx.lineWidth = colorStrokeSize;
-                  ctx.strokeText(char, 0, yOffset);
-                  ctx.fillText(char, 0, yOffset);
-                }
-                ctx.restore();
-                yOffset += fontSize + letterSpacing; // 垂直移动到下一个字符位置
-              }
-              ctx.restore();
-              xOffset += ((spaceSize - 50) / 50 + 1) * fontSize; // 移动到下一列
-            }
-            ctx.restore();
-          }
-        }
-      } 
-      else{
+      // 根据配置调用不同的绘制函数
+      if (curve) {
         if (vertical_bool) {
-          // 竖排模式的绘制逻辑
-          for (let pass = 0; pass < 2; pass++) {
-            let xOffset = 0;
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i];
-              let yOffset = 0;
-              for (let j = 0; j < line.length; j++) {
-                const char = line[j];
-                // 获取字符的宽度，并加上字间距
-                // const charWidth = ctx.measureText(char).width + letterSpacing;
-                if (pass === 0) {
-                  ctx.strokeStyle = outstrokeColor;
-                  ctx.lineWidth = whiteStrokeSize;
-                  ctx.strokeText(char, xOffset, yOffset);
-                } else {
-                  ctx.strokeStyle = strokeColor;
-                  ctx.lineWidth = colorStrokeSize;
-                  ctx.strokeText(char, xOffset, yOffset);
-                  ctx.fillText(char, xOffset, yOffset);
-                }
-                yOffset += fontSize + letterSpacing; // 调整字间距
-              }
-              xOffset += ((spaceSize - 50) / 50 + 1) * fontSize; // 调整列间距
-            }
-          }
-          ctx.restore();
+          drawCurvedVerticalText(ctx);
+        } else {
+          drawCurvedHorizontalText(ctx);
         }
-        
-        else {
-          for (let pass = 0; pass < 2; pass++) {
-            let yOffset = 0;
-            for (let line of lines) {
-              let xOffset = 0;
-              for (let i = 0; i < line.length; i++) {
-                const char = line[i];
-                // 获取字符的宽度，并加上字间距
-                const charWidth = ctx.measureText(char).width + letterSpacing;
-          
-                if (pass === 0) {
-                  ctx.strokeStyle = outstrokeColor;
-                  ctx.lineWidth = whiteStrokeSize;
-                  ctx.strokeText(char, xOffset, yOffset);
-                } else {
-                  ctx.strokeStyle = strokeColor;
-                  ctx.lineWidth = colorStrokeSize;
-                  ctx.strokeText(char, xOffset, yOffset);
-                  ctx.fillText(char, xOffset, yOffset);
-                }
-                xOffset += charWidth;
-              }
-              yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
-            }
-          }
-          ctx.restore();
+      } else {
+        if (vertical_bool) {
+          drawVerticalText(ctx);
+        } else {
+          drawHorizontalText(ctx);
         }
       }
       
+      ctx.restore();
     }
   };
+
 
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
@@ -529,11 +501,7 @@ function App() {
           <div className="picker">
             <Picker setCharacter={setCharacter} />
           </div>
-          <div className="uploader">
-            <Button color="secondary" onClick={handleImageUpload}>
-            Upload
-            </Button>
-          </div>
+
           <div className="buttons">
             <Button color="secondary" onClick={copy}>
               copy
