@@ -327,9 +327,9 @@
         "name": "juri_01",
         "character": "juri",
         "img": "juri_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#F8E09D",
-        "outstrokeColor": "#2D2D2D",
+        "fillColor": "#F8E09D",
+        "strokeColor": "#6E4F45",
+        "outstrokeColor": "#6E4F45",
         "vertical": false,
         "defaultText": {
             "text": "loading",
