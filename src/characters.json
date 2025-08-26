@@ -9,7 +9,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -26,7 +26,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -43,7 +43,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -60,7 +60,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -77,7 +77,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -94,7 +94,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -111,7 +111,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -128,7 +128,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -145,7 +145,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -162,7 +162,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -179,7 +179,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -196,7 +196,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -230,7 +230,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -247,7 +247,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -264,7 +264,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -281,7 +281,7 @@
         "outstrokeColor": "#FF99CB",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -298,7 +298,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -330,11 +330,11 @@
         "fillColor": "#F8E09D",
         "strokeColor": "#6E4F45",
         "outstrokeColor": "#6E4F45",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "loading",
-            "x": 58,
-            "y": 58,
+            "text": "へん",
+            "x": 40,
+            "y": 50,
             "r": -2,
             "s": 42
         }
@@ -349,7 +349,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -400,7 +400,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -417,7 +417,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -451,7 +451,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -468,7 +468,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -502,7 +502,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -519,7 +519,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -536,7 +536,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -553,7 +553,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -570,7 +570,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -604,7 +604,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -621,7 +621,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -655,7 +655,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -672,7 +672,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -689,7 +689,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -706,7 +706,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -723,7 +723,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -740,7 +740,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -757,7 +757,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -774,7 +774,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -791,7 +791,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -808,7 +808,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -825,7 +825,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -842,7 +842,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -859,7 +859,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -876,7 +876,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -893,7 +893,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -978,7 +978,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -995,7 +995,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
@@ -1012,7 +1012,7 @@
         "outstrokeColor": "#ffffff",
         "vertical": false,
         "defaultText": {
-            "text": "loading",
+            "text": "Nothing",
             "x": 58,
             "y": 58,
             "r": -2,
