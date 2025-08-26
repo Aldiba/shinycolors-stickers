@@ -33,6 +33,20 @@
   margin-left: -30px;
 }
 
+.text_react {
+  display: flex;
+  gap: 16px; 
+}
+.text_react .MuiFormControl-root {
+  min-width: 10rem; 
+  flex-grow: 1; 
+  flex-basis: 0; 
+}
+.text_react .MuiTextField-root {
+  min-width: 17rem; 
+  flex-grow: 1; 
+  flex-basis: 0; 
+}
 .settings {
   color: black;
   font-family: "YurukaStd";
@@ -113,16 +127,17 @@
 }
 
 .normal {
-  
-  padding: 0rem;
+  min-width: 300px; 
   align-items: center;
   justify-content: center;
-  display: flex;
-  gap: 3rem;
   color: black;
   font-weight: bold;
   font-family: YurukaStd;
-
+}
+.normal .MuiFormControl-root {
+  min-width: 150px; 
+  flex-grow: 1; 
+  flex-basis: 0; 
 }
 
 .linesetting {
@@ -181,4 +196,9 @@
   font-weight: bold;
   font-family: YurukaStd;
   
+}
+
+.img-loader-container {
+  align-items: center;
+  justify-content: center;
 }

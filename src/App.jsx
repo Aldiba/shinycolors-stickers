@@ -1,7 +1,10 @@
+import YurukaStd from "./fonts/YurukaStd.woff2";
 import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
+import FanMengShaoNvTi from "./fonts/贩梦少女.woff";
+import HeYuanTi from "./fonts/极影毁片和圆.woff";
+import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff";
 import "./App.css";
 import Canvas from "./components/Canvas";
-import { useState, useEffect } from "react";
 import characters from "./characters.json";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
@@ -10,6 +13,13 @@ import Switch from "@mui/material/Switch";
 import Snackbar from "@mui/material/Snackbar";
 import ColorPicker from "@uiw/react-color-chrome";
 
+import { useState, useEffect } from "react";
+
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+
 import Picker from "./components/Picker";
 import Info from "./components/Info";
 import getConfiguration from "./utils/config";
@@ -17,6 +27,14 @@ import log from "./utils/log";
 import { preloadFont } from "./utils/preload";
 
 const { ClipboardItem } = window;
+const fontList = [
+  { name: "YurukaStd", path: YurukaStd },
+  { name: "SSFangTangTi", path: SSFangTangTi },
+  { name: "FanMengShaoNvTi", path: FanMengShaoNvTi },
+  { name: "HeYuanTi", path: HeYuanTi },
+  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi },
+];
+
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -78,19 +96,47 @@ function App() {
 
   const [fillColor, setFillcolor] = useState(characters[character].fillColor);
   const [strokeColor, setStrokecolor] = useState(characters[character].strokeColor);
-  const [outstrokeColor, setOutStrokecolor] = useState("#000000");
+  const [outstrokeColor, setOutStrokecolor] = useState(characters[character].outstrokeColor);
   const [colorStrokeSize, setColorStrokeSize] = useState(5);
   const [whiteStrokeSize, setWhiteStrokeSize] = useState(10);
 
-  const [vertical_bool, setVertical] = useState(false);
+  const [vertical_bool, setVertical] = useState(characters[character].vertical);
+  const [textOnTop, setTextOnTop] = useState(true);
+  const [font, setFont] = useState("YurukaStd");
 
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(15);
   const [loaded, setLoaded] = useState(false);
   const img = new Image();
+  // const [uploadedImage, setUploadedImage] = useState(null);
+  // const [useUploadedImage, setUseUploadedImage] = useState(false);
 
+  // const handleImageUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setUploadedImage(reader.result);
+  //       setUseUploadedImage(true); // 开启使用上传图片的模式
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   useEffect(() => {
+
+    async function doPreloadFonts() {
+      for (const f of fontList) {
+        try {
+          await preloadFont(f.name, f.path);
+        } catch (error) {
+          console.error(`Failed to preload font: ${f.name}`, error);
+        }
+      }
+    }
+    // setUseUploadedImage(false);
+    
+    doPreloadFonts();
     setText(characters[character].defaultText.text);
     setPosition({
       x: characters[character].defaultText.x,
@@ -99,9 +145,14 @@ function App() {
     setRotate(characters[character].defaultText.r);
     setSpaceSize(50);
     setFontSize(characters[character].defaultText.s);
+    setVertical(characters[character].vertical);
+    setOutStrokecolor(characters[character].outstrokeColor);
     setStrokecolor(characters[character].strokeColor);
     setFillcolor(characters[character].fillColor);
     setLoaded(false);
+
+    
+
   }, [character]);
 
   img.src = "img/" + characters[character].img;
@@ -202,32 +253,30 @@ function App() {
     }
   };
 
-  const draw = (ctx) => {
-    ctx.canvas.width = 296;
-    ctx.canvas.height = 256;
-
-    if (loaded && document.fonts.check("12px YurukaStd")) {
-      // 绘制背景图片
-      const hRatio = ctx.canvas.width / img.width;
-      const vRatio = ctx.canvas.height / img.height;
-      const ratio = Math.min(hRatio, vRatio);
-      const centerShiftX = (ctx.canvas.width - img.width * ratio) / 2;
-      const centerShiftY = (ctx.canvas.height - img.height * ratio) / 2;
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        img.width,
-        img.height,
-        centerShiftX,
-        centerShiftY,
-        img.width * ratio,
-        img.height * ratio
-      );
-
+  // 图绘制
+  const drawImage = (ctx) => {
+    const hRatio = ctx.canvas.width / img.width;
+    const vRatio = ctx.canvas.height / img.height;
+    const ratio = Math.min(hRatio, vRatio);
+    const centerShiftX = (ctx.canvas.width - img.width * ratio) / 2;
+    const centerShiftY = (ctx.canvas.height - img.height * ratio) / 2;
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShiftX,
+      centerShiftY,
+      img.width * ratio,
+      img.height * ratio
+    );
+  };
+  
+  // 文本绘制
+  const drawText = (ctx) => {
       // 设置通用文本样式
-      ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
+      ctx.font = `${fontSize}px ${font}, SSFangTangTi, YouWangFangYuanTi`;
       ctx.miterLimit = 2.5;
       ctx.save();
       ctx.translate(position.x, position.y);
@@ -238,9 +287,7 @@ function App() {
       // 根据配置调用不同的绘制函数
       if (curve) {
         if (vertical_bool) {
-          
           drawCurvedVerticalText(ctx);
-          // ctx.translate(0, fontSize * 3);
         } else {
           drawCurvedHorizontalText(ctx);
         }
@@ -251,9 +298,29 @@ function App() {
           drawHorizontalText(ctx);
         }
       }
-      
       ctx.restore();
-    }
+  };
+
+
+  // 绘制主函数
+  const draw = (ctx) => {
+      ctx.canvas.width = 296;
+      ctx.canvas.height = 256;
+      
+      
+      if (loaded && font) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        
+        if (textOnTop) {
+            // 文本在图像之上
+            drawImage(ctx);
+            drawText(ctx);
+        } else {
+            // 文本在图像之下
+            drawText(ctx);
+            drawImage(ctx);
+        }
+      }
   };
 
 
@@ -327,6 +394,9 @@ function App() {
           />
           
         </div>
+
+        
+
         <div className="horizontal">
           <Slider
             className="slider-horizontal"
@@ -338,17 +408,37 @@ function App() {
             track={false}
             color="secondary"
           />
+          
+          <div className="text_react">
+            <div className="text">
+              <TextField
+                label="Text"
+                size="small"
+                color="secondary"
+                value={text}
+                multiline={true}
+                fullWidth
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
 
-          <div className="text">
-            <TextField
-              label="Text"
-              size="small"
-              color="secondary"
-              value={text}
-              multiline={true}
-              fullWidth
-              onChange={(e) => setText(e.target.value)}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="font-select-label" color="secondary">Font</InputLabel>
+              <Select
+                labelId="font-select-label"
+                value={font}
+                label="Font"
+                size="small"
+                onChange={(e) => setFont(e.target.value)}
+                color="secondary"
+              >
+                {fontList.map((f) => (
+                  <MenuItem key={f.name} value={f.name}>
+                    {f.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
 
           <div className="settings">
@@ -399,7 +489,7 @@ function App() {
               </div>
               <div>
                 <label>
-                  <nobr>Font size: </nobr>
+                  <nobr>Font Size: </nobr>
                 </label>
                 <Slider
                   value={fontSize}
@@ -416,6 +506,15 @@ function App() {
                 <Switch
                   checked={vertical_bool}
                   onChange={(e) => setVertical(e.target.checked)}
+                  color="secondary"
+                />
+              </div>
+
+              <div>
+                <label>TopText:</label>
+                <Switch
+                  checked={textOnTop}
+                  onChange={(e) => setTextOnTop(e.target.checked)}
                   color="secondary"
                 />
               </div>
@@ -501,8 +600,26 @@ function App() {
 
           </div>
           
-          <div className="picker">
-            <Picker setCharacter={setCharacter} />
+          <div className="img-loader-container">
+
+            <div className="picker">
+              <Picker setCharacter={setCharacter} />
+            </div>
+            {/* <div className="upload-container" style={{ margin: "16px 0" }}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                id="image-upload"
+                style={{ display: "none" }}
+              />
+              <label htmlFor="image-upload">
+                <Button variant="outlined" component="span" color="secondary">
+                  Upload Image
+                </Button>
+              </label>
+            </div> */}
+
           </div>
 
           <div className="buttons">
