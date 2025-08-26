@@ -91,7 +91,7 @@ function App() {
   const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
   const [spaceSize, setSpaceSize] = useState(50);
   const [rotate, setRotate] = useState(characters[character].defaultText.r);
-  const [letterSpacing, setLetterSpacing] = useState(0);
+  const [letterSpacing, setLetterSpacing] = useState(characters[character].defaultText.ls);
 
 
   const [fillColor, setFillcolor] = useState(characters[character].fillColor);
@@ -142,6 +142,7 @@ function App() {
       x: characters[character].defaultText.x,
       y: characters[character].defaultText.y,
     });
+    setLetterSpacing(characters[character].defaultText.ls);
     setRotate(characters[character].defaultText.r);
     setSpaceSize(50);
     setFontSize(characters[character].defaultText.s);
