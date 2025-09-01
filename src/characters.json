@@ -670,9 +670,9 @@
         "name": "toru_9",
         "character": "toru",
         "img": "asakuratoru-12_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#65F4FF",
+        "outstrokeColor": "#D87392",
         "vertical": true,
         "defaultText": {
             "text": "好似",

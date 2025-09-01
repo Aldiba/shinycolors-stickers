@@ -105,23 +105,10 @@ function App() {
   const [font, setFont] = useState("YurukaStd");
 
   const [curve, setCurve] = useState(false);
-  const [curvefactor, setCurveFactor] = useState(15);
+  const [curvefactor, setCurveFactor] = useState(6);
   const [loaded, setLoaded] = useState(false);
   const img = new Image();
-  // const [uploadedImage, setUploadedImage] = useState(null);
-  // const [useUploadedImage, setUseUploadedImage] = useState(false);
 
-  // const handleImageUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setUploadedImage(reader.result);
-  //       setUseUploadedImage(true); // 开启使用上传图片的模式
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   useEffect(() => {
 
@@ -134,7 +121,6 @@ function App() {
         }
       }
     }
-    // setUseUploadedImage(false);
     
     doPreloadFonts();
     setText(characters[character].defaultText.text);
@@ -551,7 +537,7 @@ function App() {
                 />
               </div>
               <div>
-                <label>Curve (Beta): </label>
+                <label>Curve: </label>
                 <Switch
                   checked={curve}
                   onChange={(e) => setCurve(e.target.checked)}
