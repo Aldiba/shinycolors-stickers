@@ -13,3 +13,8 @@ body {
   font-family: 'SSFangTangTi';
   src: local('SSFangTangTi'), url(./fonts/ShangShouFangTangTi.woff2) format('woff2');
 }
+
+@font-face {
+  font-family: 'YouWangFangYuanTi';
+  src: local('YouWangFangYuanTi'), url(./fonts/攸望方圆体-中.woff) format('woff');
+}

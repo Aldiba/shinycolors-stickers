@@ -101,7 +101,7 @@ function App() {
 
   const [vertical_bool, setVertical] = useState(characters[character].vertical);
   const [textOnTop, setTextOnTop] = useState(true);
-  const [font, setFont] = useState("YurukaStd");
+  const [font, setFont] = useState("YurukaStd, SSFangTangTi, YouWangFangYuanTi");
 
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(6);

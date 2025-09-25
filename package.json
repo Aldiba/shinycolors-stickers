@@ -1,7 +1,7 @@
 {
   "name": "shinycolors-stickers",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://aldiba.github.io/shinycolors-stickers/",
   "dependencies": {
     "@emotion/react": "^11.14.0",
