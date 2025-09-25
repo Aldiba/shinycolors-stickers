@@ -50,19 +50,22 @@ function App() {
   }, [rand]);
 
   useEffect(() => {
+    const controller = new AbortController();
     async function doPreloadFont() {
-      const controller = new AbortController();
       try {
+        await preloadFont("YurukaStd", YurukaStd, controller.signal);
         await preloadFont("SSFangTangTi", SSFangTangTi, controller.signal);
+        await preloadFont("YouWangFangYuanTi", YouWangFangYuanTi, controller.signal);
       } catch (error) {
         console.error(error);
-      } finally {
-        return () => {
-          controller.abort();
-        };
       }
     }
     doPreloadFont();
+  
+    return () => {
+
+      controller.abort();
+    };
   }, []);
 
   const [infoOpen, setInfoOpen] = useState(false);
