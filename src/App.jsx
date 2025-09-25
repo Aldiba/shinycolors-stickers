@@ -1,5 +1,6 @@
 import YurukaStd from "./fonts/YurukaStd.woff2";
 import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
+import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff";
 import "./App.css";
 import Canvas from "./components/Canvas";
 import characters from "./characters.json";
@@ -27,6 +28,7 @@ const { ClipboardItem } = window;
 const fontList = [
   { name: "YurukaStd", path: YurukaStd },
   { name: "SSFangTangTi", path: SSFangTangTi },
+  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi },
 ];
 
 
