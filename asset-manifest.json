@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/shinycolors-stickers/static/css/main.78e04281.css",
-    "main.js": "/shinycolors-stickers/static/js/main.91b66735.js",
+    "main.js": "/shinycolors-stickers/static/js/main.fb839dc3.js",
+    "static/media/攸望方圆体-中.woff": "/shinycolors-stickers/static/media/攸望方圆体-中.c963610344280776c645.woff",
     "static/media/YurukaStd.woff2": "/shinycolors-stickers/static/media/YurukaStd.e4589185c34a94a462b4.woff2",
     "static/media/ShangShouFangTangTi.woff2": "/shinycolors-stickers/static/media/ShangShouFangTangTi.86f6651bda19f72a48d3.woff2",
     "index.html": "/shinycolors-stickers/index.html",
     "main.78e04281.css.map": "/shinycolors-stickers/static/css/main.78e04281.css.map",
-    "main.91b66735.js.map": "/shinycolors-stickers/static/js/main.91b66735.js.map"
+    "main.fb839dc3.js.map": "/shinycolors-stickers/static/js/main.fb839dc3.js.map"
   },
   "entrypoints": [
     "static/css/main.78e04281.css",
-    "static/js/main.91b66735.js"
+    "static/js/main.fb839dc3.js"
   ]
 }
