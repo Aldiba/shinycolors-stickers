@@ -334,7 +334,7 @@
         "vertical": true,
         "defaultText": {
             "text": "重新选字体\n结束后\n请在加载",
-            "x": 200,
+            "x": 150,
             "y": 80,
             "ls": 0,
             "r": -2,

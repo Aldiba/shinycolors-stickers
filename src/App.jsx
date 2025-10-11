@@ -101,7 +101,7 @@ function App() {
 
   const [vertical_bool, setVertical] = useState(characters[character].vertical);
   const [textOnTop, setTextOnTop] = useState(true);
-  const [font, setFont] = useState("YurukaStd, SSFangTangTi, YouWangFangYuanTi");
+  const [font, setFont] = useState("YurukaStd");
 
   const [curve, setCurve] = useState(false);
   const [curvefactor, setCurveFactor] = useState(6);
@@ -462,7 +462,7 @@ function App() {
 
             <div className="normal">
               <div>
-                <label>Rotate: </label>
+                <label>    Rotate:     </label>
                 <Slider
                   value={rotate}
                   onChange={(e, v) => setRotate(v)}
@@ -475,7 +475,7 @@ function App() {
               </div>
               <div>
                 <label>
-                  <nobr>Font Size: </nobr>
+                  <nobr>   Font Size:    </nobr>
                 </label>
                 <Slider
                   value={fontSize}
