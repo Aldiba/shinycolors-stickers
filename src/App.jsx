@@ -22,7 +22,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import CircularProgress from "@mui/material/CircularProgress"; // 新增 Loading 组件
+import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ColorPicker from "@uiw/react-color-chrome";
 
@@ -33,7 +33,6 @@ import { preloadFont } from "./utils/preload";
 
 const { ClipboardItem } = window;
 
-// --- 5. 优化：常量提取 (Constants) ---
 const CONSTANTS = {
   CANVAS_WIDTH: 296,
   CANVAS_HEIGHT: 256,
@@ -60,6 +59,9 @@ function App() {
   const [character, setCharacter] = useState(18);
   const [customImageSrc, setCustomImageSrc] = useState(null);
   const [loadedImage, setLoadedImage] = useState(null);
+  
+  // 随机种子：现在允许手动输入，所以需要保持状态同步
+  const [seed, setSeed] = useState(Math.floor(Math.random() * 1000)); 
 
   const [settings, setSettings] = useState({
     text: "",
@@ -79,14 +81,17 @@ function App() {
     font: "YurukaStd",
     curve: false,
     curveFactor: 6,
+    // --- Wobbly 相关设置 ---
+    wobbly: false, 
+    wobblyScale: 0.3,   // 缩放随机强度 (0-1)
+    wobblyRotation: 0.3 // 旋转随机强度 (0-1)
   });
 
-  // --- 1. 优化：使用 deferredSettings 进行防抖渲染 ---
-  // UI 控件绑定 settings (实时响应)，但 Canvas 绘图绑定 deferredSettings (稍有延迟)
-  // 这能极大提升低性能设备上的滑动流畅度
+  // --- UI 响应优化 ---
   const deferredSettings = useDeferredValue(settings);
+  const deferredSeed = useDeferredValue(seed); 
 
-  // --- 拖拽相关的 Refs ---
+  // --- 拖拽 Refs ---
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
 
@@ -157,10 +162,22 @@ function App() {
     setSettings((prev) => ({ ...prev, [key]: value }));
   };
 
-  // --- 2. 优化：拖拽交互逻辑 ---
+  const generateNewSeed = () => {
+    setSeed(Math.floor(Math.random() * 10000));
+  };
+
+  const handleSeedChange = (e) => {
+    const val = parseInt(e.target.value, 10);
+    if (!isNaN(val)) {
+      setSeed(val);
+    } else if (e.target.value === "") {
+        setSeed(0);
+    }
+  };
+
+  // --- 拖拽交互逻辑 ---
   const handlePointerDown = (e) => {
     isDragging.current = true;
-    // 兼容鼠标和触摸
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     lastPos.current = { x: clientX, y: clientY };
@@ -168,11 +185,7 @@ function App() {
 
   const handlePointerMove = (e) => {
     if (!isDragging.current) return;
-    
-    // 防止触摸移动时触发页面滚动
-    if(e.cancelable && e.type === 'touchmove') {
-      e.preventDefault(); 
-    }
+    if(e.cancelable && e.type === 'touchmove') e.preventDefault(); 
 
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -180,7 +193,6 @@ function App() {
     const dx = clientX - lastPos.current.x;
     const dy = clientY - lastPos.current.y;
 
-    // 直接更新位置 (注意：这里直接更新 settings 可能会频繁渲染，但 React 18 会自动批处理)
     setSettings(prev => ({
       ...prev,
       x: prev.x + dx,
@@ -194,13 +206,12 @@ function App() {
     isDragging.current = false;
   };
 
-  // --- 绘图核心逻辑 (应用了 Deferred Value) ---
+  // --- 绘图核心逻辑 ---
   const draw = useCallback((ctx) => {
     if (!loadedImage) return;
 
-    // 使用 deferredSettings 里的值，而不是外部的 settings
-    // 这样 UI 变化时，draw 不会立即执行，而是等待 React 闲置
     const currentSettings = deferredSettings;
+    const currentSeed = deferredSeed;
 
     document.fonts.load(`${currentSettings.s}px ${currentSettings.font}`); 
 
@@ -222,15 +233,14 @@ function App() {
       const {
         text, font, s, x, y, r, fillColor, strokeColor, outstrokeColor,
         whiteStrokeSize, colorStrokeSize, lineSpacing, ls,
-        vertical, curve, curveFactor
+        vertical, curve, curveFactor, 
+        wobbly, wobblyScale, wobblyRotation // 引入新变量
       } = currentSettings;
       
       ctx.font = `${s}px ${font}, SSFangTangTi, YouWangFangYuanTi`;
       ctx.miterLimit = CONSTANTS.MITER_LIMIT;
-      
-      // --- 6. 优化：视觉圆润化 ---
-      ctx.lineJoin = "round"; // 防止描边出现尖角
-      ctx.lineCap = "round";  // 笔触末端圆润
+      ctx.lineJoin = "round"; 
+      ctx.lineCap = "round";
 
       ctx.save();
       ctx.translate(x, y);
@@ -251,22 +261,50 @@ function App() {
         }
       };
 
+      // 封装：带有 Wobbly 效果的绘制器
+      const drawEffectiveChar = (char, dx, dy, pass, index) => {
+        if (wobbly) {
+          // 伪随机数 (-1 ~ 1)
+          const pseudoRandom = Math.sin(currentSeed + index * 12.34); 
+          
+          // 大小控制： 1 ± (随机数 * 强度)
+          // 如果 wobblyScale 为 0.3，则缩放范围约 0.7 ~ 1.3
+          const scale = 1 + (pseudoRandom * wobblyScale); 
+
+          // 角度控制： 随机数 * 强度 (弧度)
+          // 如果 wobblyRotation 为 0.5，则旋转范围约 -0.5rad ~ 0.5rad
+          const rotation = pseudoRandom * wobblyRotation;
+
+          ctx.save();
+          ctx.translate(dx, dy);
+          ctx.rotate(rotation);
+          ctx.scale(scale, scale);
+          drawStrokeAndFill(char, 0, 0, pass);
+          ctx.restore();
+        } else {
+          drawStrokeAndFill(char, dx, dy, pass);
+        }
+      };
+
       const lines = text.split("\n");
+      let charCounter = 0; 
 
       if (curve) {
         if (vertical) {
           for (let pass = 0; pass < 2; pass++) {
             ctx.save();
             let xOffset = 0;
+            charCounter = 0; 
             for (const line of lines) {
               let yOffset = 0;
               ctx.save();
               ctx.translate(xOffset, 0);
               for (let j = 0; j < line.length; j++) {
+                charCounter++;
                 const char = line[j];
                 const charAngle = (Math.PI / 180) * j * ((curveFactor - 6) * 3);
                 ctx.rotate(charAngle);
-                drawStrokeAndFill(char, 0, yOffset, pass);
+                drawEffectiveChar(char, 0, yOffset, pass, charCounter);
                 yOffset += s + ls;
               }
               ctx.restore();
@@ -275,45 +313,53 @@ function App() {
             ctx.restore();
           }
         } else {
-          let currentY = 0;
+          let currentY_H = 0;
           for (const line of lines) {
-            const lineAngle = (Math.PI * line.length) / curveFactor;
-            for (let pass = 0; pass < 2; pass++) {
-              ctx.save();
-              ctx.translate(0, currentY);
-              for (const char of line) {
-                ctx.rotate(lineAngle / line.length / (0.3 * curveFactor));
-                ctx.save();
-                ctx.translate(0, -1 * s * CONSTANTS.CURVE_OFFSET_FACTOR);
-                drawStrokeAndFill(char, 0, 0, pass);
-                ctx.restore();
-              }
-              ctx.restore();
-            }
-            currentY += ((lineSpacing - 50) / 50 + 1) * s; 
+             const lineAngle = (Math.PI * line.length) / curveFactor;
+             for (let pass = 0; pass < 2; pass++) {
+               ctx.save();
+               ctx.translate(0, currentY_H);
+               let lineStartCharIndex = lines.slice(0, lines.indexOf(line)).join("").length;
+               for (let j = 0; j < line.length; j++) {
+                 const char = line[j];
+                 ctx.rotate(lineAngle / line.length / (0.3 * curveFactor));
+                 ctx.save();
+                 ctx.translate(0, -1 * s * CONSTANTS.CURVE_OFFSET_FACTOR);
+                 drawEffectiveChar(char, 0, 0, pass, lineStartCharIndex + j);
+                 ctx.restore();
+               }
+               ctx.restore();
+             }
+             currentY_H += ((lineSpacing - 50) / 50 + 1) * s; 
           }
         }
       } else {
+        // --- 正常模式 ---
         if (vertical) {
           for (let pass = 0; pass < 2; pass++) {
             let xOffset = 0;
+            charCounter = 0;
             for (const line of lines) {
               let yOffset = 0;
               for (const char of line) {
-                drawStrokeAndFill(char, xOffset, yOffset, pass);
+                charCounter++;
+                drawEffectiveChar(char, xOffset, yOffset, pass, charCounter);
                 yOffset += s + ls;
               }
               xOffset += ((lineSpacing - 50) / 50 + 1) * s;
             }
           }
         } else {
+          // 横排
           for (let pass = 0; pass < 2; pass++) {
             let yOffset = 0;
+            charCounter = 0;
             for (const line of lines) {
               let xOffset = 0;
               for (const char of line) {
+                charCounter++;
                 const charWidth = ctx.measureText(char).width + ls;
-                drawStrokeAndFill(char, xOffset, yOffset, pass);
+                drawEffectiveChar(char, xOffset, yOffset, pass, charCounter);
                 xOffset += charWidth;
               }
               yOffset += ((lineSpacing - 50) / 50 + 1) * s;
@@ -332,7 +378,7 @@ function App() {
       drawImg();
     }
 
-  }, [loadedImage, deferredSettings, fontsLoaded]); // 依赖 deferredSettings
+  }, [loadedImage, deferredSettings, deferredSeed, fontsLoaded]); 
 
 
   const download = async () => {
@@ -391,7 +437,6 @@ function App() {
     }
   };
 
-  // --- 4. 优化：加载状态判断 ---
   const isReady = loadedImage && fontsLoaded;
 
   return (
@@ -404,10 +449,6 @@ function App() {
 
       <div className="container">
         <div className="vertical">
-          {/* 
-              4. 优化：Loading 遮罩层容器 
-              2. 优化：绑定拖拽事件
-          */}
           <div 
             className="canvas-wrapper" 
             style={{ position: 'relative', cursor: isDragging.current ? 'grabbing' : 'grab' }}
@@ -423,20 +464,13 @@ function App() {
               <Canvas draw={draw} spaceSize={settings.lineSpacing} />
             </div>
 
-            {/* Loading Overlay */}
             {!isReady && (
               <Box
                 sx={{
-                  position: 'absolute',
-                  top: 0, left: 0,
-                  width: '100%', height: '100%',
+                  position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                   bgcolor: 'rgba(255, 255, 255, 0.8)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 10,
-                  flexDirection: 'column',
-                  gap: 1
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  zIndex: 10, flexDirection: 'column', gap: 1
                 }}
               >
                 <CircularProgress color="secondary" />
@@ -539,19 +573,20 @@ function App() {
                   track={false} color="secondary"
                 />
               </div>
-              <div>
-                <label>Vertical:</label>
-                <Switch
-                  checked={settings.vertical}
-                  onChange={(e) => updateSetting("vertical", e.target.checked)}
-                  color="secondary"
-                />
-              </div>
+              
               <div>
                 <label>TextOnTop:</label>
                 <Switch
                   checked={settings.textOnTop}
                   onChange={(e) => updateSetting("textOnTop", e.target.checked)}
+                  color="secondary"
+                />
+              </div>
+              <div>
+                <label>Vertical:</label>
+                <Switch
+                  checked={settings.vertical}
+                  onChange={(e) => updateSetting("vertical", e.target.checked)}
                   color="secondary"
                 />
               </div>
@@ -593,6 +628,75 @@ function App() {
                   track={false} color="secondary"
                 />
               </div>
+            </div>
+
+            {/* --- 新增：Wobbly Section (独立一行，位于 spacing 下面) --- */}
+            <div className="wobbly-section" style={{
+              display: 'flex', flexDirection: 'column', gap: '8px',
+              padding: '10px', border: '1px solid #eee', borderRadius: '8px',
+              margin: '10px 0'
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{display:'flex', alignItems:'center'}}>
+                      <label style={{marginRight: '8px', fontWeight: 'bold'}}>Wobbly:</label>
+                      <Switch
+                        checked={settings.wobbly}
+                        onChange={(e) => updateSetting("wobbly", e.target.checked)}
+                        color="secondary"
+                      />
+                  </div>
+                  
+                  {settings.wobbly && (
+                    <div style={{display:'flex', gap: '8px', alignItems: 'center'}}>
+                         {/* 种子输入框 */}
+                        <TextField
+                           label="Seed"
+                           type="number"
+                           size="small"
+                           variant="outlined"
+                           value={seed}
+                           onChange={handleSeedChange}
+                           color="secondary"
+                           style={{width: '80px'}}
+                           inputProps={{style: {padding: '5px 8px'}}}
+                           InputLabelProps={{style: {fontSize: '0.8rem'}}}
+                        />
+                        <Button 
+                            size="small" 
+                            onClick={generateNewSeed}
+                            color="secondary"
+                            variant="outlined"
+                            style={{minWidth: '30px', padding: '4px'}}
+                            title="Random Seed"
+                        >
+                            🎲
+                        </Button>
+                    </div>
+                  )}
+                </div>
+
+                {settings.wobbly && (
+                    <div style={{display: 'flex', gap: '15px'}}>
+                        <div style={{flex: 1}}>
+                            <label style={{fontSize: '0.8rem'}}>Scale Chaos:</label>
+                            <Slider
+                                value={settings.wobblyScale}
+                                onChange={(e, v) => updateSetting("wobblyScale", v)}
+                                min={0} max={1} step={0.01}
+                                track={false} color="secondary" size="small"
+                            />
+                        </div>
+                        <div style={{flex: 1}}>
+                            <label style={{fontSize: '0.8rem'}}>Rotate Chaos:</label>
+                            <Slider
+                                value={settings.wobblyRotation}
+                                onChange={(e, v) => updateSetting("wobblyRotation", v)}
+                                min={0} max={1} step={0.01}
+                                track={false} color="secondary" size="small"
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
             
             <div className="color-pickers-container">
