@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback, useDeferredValue } fro
 // 字体引入
 import YurukaStd from "./fonts/YurukaStd.woff2";
 import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
-import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff";
+import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff2"; // 后台加载
 
 // 样式与组件
 import "./App.css";
@@ -43,24 +43,21 @@ const CONSTANTS = {
 };
 
 const fontList = [
-  { name: "YurukaStd", path: YurukaStd },
-  { name: "SSFangTangTi", path: SSFangTangTi },
-  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi },
+  { name: "YurukaStd", path: YurukaStd },       // 索引 0: 关键
+  { name: "SSFangTangTi", path: SSFangTangTi }, // 索引 1: 关键
+  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi }, // 索引 2: 非关键 (后台加载)
 ];
 
 function App() {
-  // --- 全局配置与UI状态 ---
+  // ... (状态定义保持不变) ...
   const [config, setConfig] = useState(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // --- 核心绘图状态 ---
   const [character, setCharacter] = useState(18);
   const [customImageSrc, setCustomImageSrc] = useState(null);
   const [loadedImage, setLoadedImage] = useState(null);
-  
-  // 随机种子：现在允许手动输入，所以需要保持状态同步
   const [seed, setSeed] = useState(Math.floor(Math.random() * 1000)); 
 
   const [settings, setSettings] = useState({
@@ -81,41 +78,67 @@ function App() {
     font: "YurukaStd",
     curve: false,
     curveFactor: 6,
-    // --- Wobbly 相关设置 ---
     wobbly: false, 
-    wobblyScale: 0.3,   // 缩放随机强度 (0-1)
-    wobblyRotation: 0.3 // 旋转随机强度 (0-1)
+    wobblyScale: 0.3,   
+    wobblyRotation: 0.3 
   });
 
-  // --- UI 响应优化 ---
   const deferredSettings = useDeferredValue(settings);
   const deferredSeed = useDeferredValue(seed); 
-
-  // --- 拖拽 Refs ---
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
 
-  // --- 初始化与字体预加载 ---
+  // --- 核心修改：初始化与字体预加载 ---
   useEffect(() => {
     getConfiguration().then(setConfig).catch(console.error);
     const controller = new AbortController();
     
     const loadFonts = async () => {
-      const promises = fontList.map(f => 
+      // 1. 定义关键字体 (前两个)
+      const criticalFonts = fontList.slice(0, 2);
+      // 2. 定义非关键字体 (第三个及以后)
+      const optionalFonts = fontList.slice(2);
+
+      // 3. 立即触发关键字体的加载
+      const criticalPromises = criticalFonts.map(f => 
         preloadFont(f.name, f.path, controller.signal)
-          .catch(err => console.error(`Failed to load ${f.name}`, err))
+          .catch(err => console.error(`Failed to load critical font ${f.name}`, err))
       );
-      await Promise.all(promises);
-      await document.fonts.ready;
-      console.log("All fonts loaded!");
-      setFontsLoaded(true);
+
+      // 4. 立即触发非关键字体的加载 (让它在后台跑，我们不 await 它)
+      optionalFonts.forEach(f => {
+        preloadFont(f.name, f.path, controller.signal)
+          .then(() => {
+             console.log(`Optional font loaded: ${f.name}`);
+             // 可选：如果用户碰巧选了第三个字体，这里可以强制重绘一次
+             // 但通常不需要，因为 Canvas 下一次操作会自动用上
+          })
+          .catch(err => console.error(`Failed to load optional font ${f.name}`, err));
+      });
+
+      // 5. 只等待关键字体完成！
+      await Promise.all(criticalPromises);
+      
+      // 等待浏览器解析关键字体
+      // 注意：document.fonts.ready 可能会等待所有 pending 的字体，
+      // 为了让 UI 更快解除锁定，我们可以假设 Promise.all 结束后，关键字体已经可用。
+      // 如果你想极致快，可以把下面这行 await document.fonts.ready 注释掉，
+      // 但保留它通常比较稳妥，防止 FOUT (字体闪烁)。
+      // 这里我们为了速度，选择相信 preloadFont 内部的 font.load() 已经足够。
+      
+      console.log("Critical fonts loaded! UI Unlocked.");
+      setFontsLoaded(true); // 解除 Loading 遮罩
     };
 
     loadFonts();
     return () => controller.abort();
   }, []);
 
-  // --- 角色切换逻辑 ---
+  // ... (后续所有代码保持不变) ...
+  
+  // 为了确保代码完整性，以下是接下来的逻辑摘要，直接复制粘贴即可覆盖原文件
+  // -----------------------------------------------------------------
+
   useEffect(() => {
     const charData = characters[character];
     const def = charData.defaultText;

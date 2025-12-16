@@ -16,5 +16,5 @@ body {
 
 @font-face {
   font-family: 'YouWangFangYuanTi';
-  src: local('YouWangFangYuanTi'), url(./fonts/攸望方圆体-中.woff) format('woff');
+  src: local('YouWangFangYuanTi'), url(./fonts/攸望方圆体-中.woff2) format('woff');
 }
