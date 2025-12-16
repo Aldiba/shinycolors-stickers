@@ -1,331 +1,354 @@
+import React, { useState, useEffect, useRef, useCallback, useDeferredValue } from "react";
+
+// 字体引入
 import YurukaStd from "./fonts/YurukaStd.woff2";
 import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
 import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff";
+
+// 样式与组件
 import "./App.css";
 import Canvas from "./components/Canvas";
 import characters from "./characters.json";
+import Picker from "./components/Picker";
+import Info from "./components/Info";
+
+// UI 库组件
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Snackbar from "@mui/material/Snackbar";
-import ColorPicker from "@uiw/react-color-chrome";
-
-import { useState, useEffect } from "react";
-
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import CircularProgress from "@mui/material/CircularProgress"; // 新增 Loading 组件
+import Box from "@mui/material/Box";
+import ColorPicker from "@uiw/react-color-chrome";
 
-import Picker from "./components/Picker";
-import Info from "./components/Info";
+// 工具类
 import getConfiguration from "./utils/config";
 import log from "./utils/log";
 import { preloadFont } from "./utils/preload";
 
 const { ClipboardItem } = window;
+
+// --- 5. 优化：常量提取 (Constants) ---
+const CONSTANTS = {
+  CANVAS_WIDTH: 296,
+  CANVAS_HEIGHT: 256,
+  DEFAULT_FONT_SIZE: 50,
+  DEFAULT_LINE_SPACING: 50,
+  MITER_LIMIT: 2.5,
+  CURVE_OFFSET_FACTOR: 3.5,
+};
+
 const fontList = [
   { name: "YurukaStd", path: YurukaStd },
   { name: "SSFangTangTi", path: SSFangTangTi },
   { name: "YouWangFangYuanTi", path: YouWangFangYuanTi },
 ];
 
-
 function App() {
+  // --- 全局配置与UI状态 ---
   const [config, setConfig] = useState(null);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // using this to trigger the useEffect because lazy to think of a better way
-  const [rand, setRand] = useState(0);
-  useEffect(() => {
-    async function doGetConfiguration() {
-      try {
-        const res = await getConfiguration();
-        setConfig(res);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    doGetConfiguration();
-  }, [rand]);
+  // --- 核心绘图状态 ---
+  const [character, setCharacter] = useState(18);
+  const [customImageSrc, setCustomImageSrc] = useState(null);
+  const [loadedImage, setLoadedImage] = useState(null);
 
+  const [settings, setSettings] = useState({
+    text: "",
+    x: 0,
+    y: 0,
+    s: CONSTANTS.DEFAULT_FONT_SIZE,
+    ls: 0,
+    r: 0,
+    lineSpacing: CONSTANTS.DEFAULT_LINE_SPACING,
+    fillColor: "#ffffff",
+    strokeColor: "#000000",
+    outstrokeColor: "#ffffff",
+    colorStrokeSize: 5,
+    whiteStrokeSize: 10,
+    vertical: false,
+    textOnTop: true,
+    font: "YurukaStd",
+    curve: false,
+    curveFactor: 6,
+  });
+
+  // --- 1. 优化：使用 deferredSettings 进行防抖渲染 ---
+  // UI 控件绑定 settings (实时响应)，但 Canvas 绘图绑定 deferredSettings (稍有延迟)
+  // 这能极大提升低性能设备上的滑动流畅度
+  const deferredSettings = useDeferredValue(settings);
+
+  // --- 拖拽相关的 Refs ---
+  const isDragging = useRef(false);
+  const lastPos = useRef({ x: 0, y: 0 });
+
+  // --- 初始化与字体预加载 ---
   useEffect(() => {
+    getConfiguration().then(setConfig).catch(console.error);
     const controller = new AbortController();
-    async function doPreloadFont() {
-      try {
-        await preloadFont("YurukaStd", YurukaStd, controller.signal);
-        await preloadFont("SSFangTangTi", SSFangTangTi, controller.signal);
-        await preloadFont("YouWangFangYuanTi", YouWangFangYuanTi, controller.signal);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    doPreloadFont();
-  
-    return () => {
-
-      controller.abort();
+    
+    const loadFonts = async () => {
+      const promises = fontList.map(f => 
+        preloadFont(f.name, f.path, controller.signal)
+          .catch(err => console.error(`Failed to load ${f.name}`, err))
+      );
+      await Promise.all(promises);
+      await document.fonts.ready;
+      console.log("All fonts loaded!");
+      setFontsLoaded(true);
     };
+
+    loadFonts();
+    return () => controller.abort();
   }, []);
 
-  const [infoOpen, setInfoOpen] = useState(false);
-  const handleClickOpen = () => {
-    setInfoOpen(true);
-  };
-  const handleClose = () => {
-    setInfoOpen(false);
-  };
-
-  const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
-  const handleSnackClose = (e, r) => {
-    setOpenCopySnackbar(false);
-  };
-
-  const [character, setCharacter] = useState(18);
-  const [text, setText] = useState(characters[character].defaultText.text);
-  const [position, setPosition] = useState({
-    x: characters[character].defaultText.x,
-    y: characters[character].defaultText.y,
-  });
-  const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
-  const [spaceSize, setSpaceSize] = useState(50);
-  const [rotate, setRotate] = useState(characters[character].defaultText.r);
-  const [letterSpacing, setLetterSpacing] = useState(characters[character].defaultText.ls);
-
-
-  const [fillColor, setFillcolor] = useState(characters[character].fillColor);
-  const [strokeColor, setStrokecolor] = useState(characters[character].strokeColor);
-  const [outstrokeColor, setOutStrokecolor] = useState(characters[character].outstrokeColor);
-  const [colorStrokeSize, setColorStrokeSize] = useState(5);
-  const [whiteStrokeSize, setWhiteStrokeSize] = useState(10);
-
-  const [vertical_bool, setVertical] = useState(characters[character].vertical);
-  const [textOnTop, setTextOnTop] = useState(true);
-  const [font, setFont] = useState("YurukaStd");
-
-  const [curve, setCurve] = useState(false);
-  const [curvefactor, setCurveFactor] = useState(6);
-  const [loaded, setLoaded] = useState(false);
-  const img = new Image();
-
-
+  // --- 角色切换逻辑 ---
   useEffect(() => {
-
-    async function doPreloadFonts() {
-      for (const f of fontList) {
-        try {
-          await preloadFont(f.name, f.path);
-        } catch (error) {
-          console.error(`Failed to preload font: ${f.name}`, error);
-        }
-      }
-    }
+    const charData = characters[character];
+    const def = charData.defaultText;
     
-    doPreloadFonts();
-    setText(characters[character].defaultText.text);
-    setPosition({
-      x: characters[character].defaultText.x,
-      y: characters[character].defaultText.y,
-    });
-    setLetterSpacing(characters[character].defaultText.ls);
-    setRotate(characters[character].defaultText.r);
-    setSpaceSize(50);
-    setFontSize(characters[character].defaultText.s);
-    setVertical(characters[character].vertical);
-    setOutStrokecolor(characters[character].outstrokeColor);
-    setStrokecolor(characters[character].strokeColor);
-    setFillcolor(characters[character].fillColor);
-    setLoaded(false);
-
+    setSettings((prev) => ({
+      ...prev,
+      text: def.text,
+      x: def.x,
+      y: def.y,
+      s: def.s,
+      ls: def.ls,
+      r: def.r,
+      vertical: charData.vertical,
+      fillColor: charData.fillColor,
+      strokeColor: charData.strokeColor,
+      outstrokeColor: charData.outstrokeColor,
+    }));
     
-
+    setCustomImageSrc(null);
   }, [character]);
 
-  img.src = "img/" + characters[character].img;
+  // --- 图片加载逻辑 ---
+  useEffect(() => {
+    const img = new Image();
+    const src = customImageSrc || ("img/" + characters[character].img);
+    img.src = src;
+    img.crossOrigin = "Anonymous";
 
-  img.onload = () => {
-    setLoaded(true);
+    img.onload = () => {
+      setLoadedImage(img);
+    };
+
+    return () => {
+      img.onload = null;
+    };
+  }, [character, customImageSrc]);
+
+  // --- 辅助函数 ---
+  const updateSetting = (key, value) => {
+    setSettings((prev) => ({ ...prev, [key]: value }));
   };
 
-  // 辅助函数：绘制描边和填充文本
-  const drawStrokeAndFill = (ctx, char, x, y, pass) => {
-    if (pass === 0) {
-      ctx.strokeStyle = outstrokeColor;
-      ctx.lineWidth = whiteStrokeSize;
-      ctx.strokeText(char, x, y);
-    } else {
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = colorStrokeSize;
-      ctx.strokeText(char, x, y);
-      ctx.fillText(char, x, y);
+  const handlePositionChange = (key, value) => {
+    setSettings((prev) => ({ ...prev, [key]: value }));
+  };
+
+  // --- 2. 优化：拖拽交互逻辑 ---
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    // 兼容鼠标和触摸
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    lastPos.current = { x: clientX, y: clientY };
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    
+    // 防止触摸移动时触发页面滚动
+    if(e.cancelable && e.type === 'touchmove') {
+      e.preventDefault(); 
     }
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const dx = clientX - lastPos.current.x;
+    const dy = clientY - lastPos.current.y;
+
+    // 直接更新位置 (注意：这里直接更新 settings 可能会频繁渲染，但 React 18 会自动批处理)
+    setSettings(prev => ({
+      ...prev,
+      x: prev.x + dx,
+      y: prev.y + dy
+    }));
+
+    lastPos.current = { x: clientX, y: clientY };
   };
 
-  // 横向文本
-  const drawHorizontalText = (ctx) => {
-    const lines = text.split("\n");
-    for (let pass = 0; pass < 2; pass++) {
-      let yOffset = 0;
-      for (const line of lines) {
-        let xOffset = 0;
-        for (const char of line) {
-          const charWidth = ctx.measureText(char).width + letterSpacing;
-          drawStrokeAndFill(ctx, char, xOffset, yOffset, pass);
-          xOffset += charWidth;
-        }
-        yOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
-      }
-    }
+  const handlePointerUp = () => {
+    isDragging.current = false;
   };
 
-  // 竖向文本
-  const drawVerticalText = (ctx) => {
-    const lines = text.split("\n");
-    for (let pass = 0; pass < 2; pass++) {
-      let xOffset = 0;
-      for (const line of lines) {
-        let yOffset = 0;
-        for (const char of line) {
-          drawStrokeAndFill(ctx, char, xOffset, yOffset, pass);
-          yOffset += fontSize + letterSpacing;
-        }
-        xOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
-      }
-    }
-  };
+  // --- 绘图核心逻辑 (应用了 Deferred Value) ---
+  const draw = useCallback((ctx) => {
+    if (!loadedImage) return;
 
-  // 横向曲线文本
-  const drawCurvedHorizontalText = (ctx) => {
-    const lines = text.split("\n");
-    for (const line of lines) {
-      const lineAngle = (Math.PI * line.length) / curvefactor;
-      for (let pass = 0; pass < 2; pass++) {
-        ctx.save();
-        for (const char of line) {
-          ctx.rotate(lineAngle / line.length / (0.3 * curvefactor));
-          ctx.save();
-          ctx.translate(0, -1 * fontSize * 3.5);
-          drawStrokeAndFill(ctx, char, 0, 0, pass);
-          ctx.restore();
-        }
-        ctx.restore();
-      }
-      ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
-    }
-  };
-  
+    // 使用 deferredSettings 里的值，而不是外部的 settings
+    // 这样 UI 变化时，draw 不会立即执行，而是等待 React 闲置
+    const currentSettings = deferredSettings;
 
-  // 竖向曲线文本
-  const drawCurvedVerticalText = (ctx) => {
-    const lines = text.split("\n");
-    for (let pass = 0; pass < 2; pass++) {
+    document.fonts.load(`${currentSettings.s}px ${currentSettings.font}`); 
+
+    ctx.canvas.width = CONSTANTS.CANVAS_WIDTH;
+    ctx.canvas.height = CONSTANTS.CANVAS_HEIGHT;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    const drawImg = () => {
+      const img = loadedImage;
+      const hRatio = ctx.canvas.width / img.width;
+      const vRatio = ctx.canvas.height / img.height;
+      const ratio = Math.min(hRatio, vRatio);
+      const centerShiftX = (ctx.canvas.width - img.width * ratio) / 2;
+      const centerShiftY = (ctx.canvas.height - img.height * ratio) / 2;
+      ctx.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
+    };
+
+    const drawTxt = () => {
+      const {
+        text, font, s, x, y, r, fillColor, strokeColor, outstrokeColor,
+        whiteStrokeSize, colorStrokeSize, lineSpacing, ls,
+        vertical, curve, curveFactor
+      } = currentSettings;
+      
+      ctx.font = `${s}px ${font}, SSFangTangTi, YouWangFangYuanTi`;
+      ctx.miterLimit = CONSTANTS.MITER_LIMIT;
+      
+      // --- 6. 优化：视觉圆润化 ---
+      ctx.lineJoin = "round"; // 防止描边出现尖角
+      ctx.lineCap = "round";  // 笔触末端圆润
+
       ctx.save();
-      let xOffset = 0;
-      for (const line of lines) {
-        let yOffset = 0;
-        ctx.save();
-        ctx.translate(xOffset, 0);
-        for (let j = 0; j < line.length; j++) {
-          const char = line[j];
-          const charAngle = (Math.PI / 180) * j * ((curvefactor - 6) * 3);
-          ctx.rotate(charAngle);
-          drawStrokeAndFill(ctx, char, 0, yOffset, pass);
-          yOffset += fontSize + letterSpacing;
-        }
-        ctx.restore();
-        xOffset += ((spaceSize - 50) / 50 + 1) * fontSize;
-      }
-      ctx.restore();
-    }
-  };
-
-  // 图绘制
-  const drawImage = (ctx) => {
-    const hRatio = ctx.canvas.width / img.width;
-    const vRatio = ctx.canvas.height / img.height;
-    const ratio = Math.min(hRatio, vRatio);
-    const centerShiftX = (ctx.canvas.width - img.width * ratio) / 2;
-    const centerShiftY = (ctx.canvas.height - img.height * ratio) / 2;
-    ctx.drawImage(
-      img,
-      0,
-      0,
-      img.width,
-      img.height,
-      centerShiftX,
-      centerShiftY,
-      img.width * ratio,
-      img.height * ratio
-    );
-  };
-  
-  // 文本绘制
-  const drawText = (ctx) => {
-      // 设置通用文本样式
-      ctx.font = `${fontSize}px ${font}, SSFangTangTi, YouWangFangYuanTi`;
-      ctx.miterLimit = 2.5;
-      ctx.save();
-      ctx.translate(position.x, position.y);
-      ctx.rotate(rotate / 10);
+      ctx.translate(x, y);
+      ctx.rotate(r / 10);
       ctx.textAlign = "center";
       ctx.fillStyle = fillColor;
 
-      // 根据配置调用不同的绘制函数
-      if (curve) {
-        if (vertical_bool) {
-          drawCurvedVerticalText(ctx);
+      const drawStrokeAndFill = (char, dx, dy, pass) => {
+        if (pass === 0) {
+          ctx.strokeStyle = outstrokeColor;
+          ctx.lineWidth = whiteStrokeSize;
+          ctx.strokeText(char, dx, dy);
         } else {
-          drawCurvedHorizontalText(ctx);
+          ctx.strokeStyle = strokeColor;
+          ctx.lineWidth = colorStrokeSize;
+          ctx.strokeText(char, dx, dy);
+          ctx.fillText(char, dx, dy);
+        }
+      };
+
+      const lines = text.split("\n");
+
+      if (curve) {
+        if (vertical) {
+          for (let pass = 0; pass < 2; pass++) {
+            ctx.save();
+            let xOffset = 0;
+            for (const line of lines) {
+              let yOffset = 0;
+              ctx.save();
+              ctx.translate(xOffset, 0);
+              for (let j = 0; j < line.length; j++) {
+                const char = line[j];
+                const charAngle = (Math.PI / 180) * j * ((curveFactor - 6) * 3);
+                ctx.rotate(charAngle);
+                drawStrokeAndFill(char, 0, yOffset, pass);
+                yOffset += s + ls;
+              }
+              ctx.restore();
+              xOffset += ((lineSpacing - 50) / 50 + 1) * s;
+            }
+            ctx.restore();
+          }
+        } else {
+          let currentY = 0;
+          for (const line of lines) {
+            const lineAngle = (Math.PI * line.length) / curveFactor;
+            for (let pass = 0; pass < 2; pass++) {
+              ctx.save();
+              ctx.translate(0, currentY);
+              for (const char of line) {
+                ctx.rotate(lineAngle / line.length / (0.3 * curveFactor));
+                ctx.save();
+                ctx.translate(0, -1 * s * CONSTANTS.CURVE_OFFSET_FACTOR);
+                drawStrokeAndFill(char, 0, 0, pass);
+                ctx.restore();
+              }
+              ctx.restore();
+            }
+            currentY += ((lineSpacing - 50) / 50 + 1) * s; 
+          }
         }
       } else {
-        if (vertical_bool) {
-          drawVerticalText(ctx);
+        if (vertical) {
+          for (let pass = 0; pass < 2; pass++) {
+            let xOffset = 0;
+            for (const line of lines) {
+              let yOffset = 0;
+              for (const char of line) {
+                drawStrokeAndFill(char, xOffset, yOffset, pass);
+                yOffset += s + ls;
+              }
+              xOffset += ((lineSpacing - 50) / 50 + 1) * s;
+            }
+          }
         } else {
-          drawHorizontalText(ctx);
+          for (let pass = 0; pass < 2; pass++) {
+            let yOffset = 0;
+            for (const line of lines) {
+              let xOffset = 0;
+              for (const char of line) {
+                const charWidth = ctx.measureText(char).width + ls;
+                drawStrokeAndFill(char, xOffset, yOffset, pass);
+                xOffset += charWidth;
+              }
+              yOffset += ((lineSpacing - 50) / 50 + 1) * s;
+            }
+          }
         }
       }
       ctx.restore();
-  };
+    };
 
+    if (currentSettings.textOnTop) {
+      drawImg();
+      drawTxt();
+    } else {
+      drawTxt();
+      drawImg();
+    }
 
-  // 绘制主函数
-  const draw = (ctx) => {
-      ctx.canvas.width = 296;
-      ctx.canvas.height = 256;
-      
-      
-      if (loaded && font) {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        
-        if (textOnTop) {
-            // 文本在图像之上
-            drawImage(ctx);
-            drawText(ctx);
-        } else {
-            // 文本在图像之下
-            drawText(ctx);
-            drawImage(ctx);
-        }
-      }
-  };
+  }, [loadedImage, deferredSettings, fontsLoaded]); // 依赖 deferredSettings
 
 
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
+    if (!canvas) return;
     const link = document.createElement("a");
     link.download = `${characters[character].name}_stickers.png`;
     link.href = canvas.toDataURL();
-    link.style.display = "none";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     await log(characters[character].id, characters[character].name, "download");
-    setRand(rand + 1);
+    setConfig(prev => prev ? ({ ...prev, total: prev.total + 1 }) : null);
   };
 
-  function b64toBlob(b64Data, contentType = null, sliceSize = null) {
-    contentType = contentType || "image/png";
-    sliceSize = sliceSize || 512;
+  function b64toBlob(b64Data, contentType = "image/png", sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -334,63 +357,118 @@ function App() {
       for (let i = 0; i < slice.length; i++) {
         byteNumbers[i] = slice.charCodeAt(i);
       }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
+      byteArrays.push(new Uint8Array(byteNumbers));
     }
     return new Blob(byteArrays, { type: contentType });
   }
 
   const copy = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
-    await navigator.clipboard.write([
-      new ClipboardItem({
-        "image/png": b64toBlob(canvas.toDataURL().split(",")[1]),
-      }),
-    ]);
-    setOpenCopySnackbar(true);
-    await log(characters[character].id, characters[character].name, "copy");
-    setRand(rand + 1);
+    if (!canvas) return;
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "image/png": b64toBlob(canvas.toDataURL().split(",")[1]),
+        }),
+      ]);
+      setOpenCopySnackbar(true);
+      await log(characters[character].id, characters[character].name, "copy");
+      setConfig(prev => prev ? ({ ...prev, total: prev.total + 1 }) : null);
+    } catch (err) {
+      console.error("Copy failed", err);
+      alert("Copy failed. Please try downloading instead.");
+    }
   };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setCustomImageSrc(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // --- 4. 优化：加载状态判断 ---
+  const isReady = loadedImage && fontsLoaded;
 
   return (
     <div className="App">
-      <Info open={infoOpen} handleClose={handleClose} config={config} />
+      <Info open={infoOpen} handleClose={() => setInfoOpen(false)} config={config} />
+      
       <div className="counter">
-        Total Stickers you made: {config?.total || "Not available"}
+        Total Stickers you made: {config?.total || "..."}
       </div>
+
       <div className="container">
         <div className="vertical">
-          <div className="canvas">
-            <Canvas draw={draw} spaceSize={spaceSize} />
+          {/* 
+              4. 优化：Loading 遮罩层容器 
+              2. 优化：绑定拖拽事件
+          */}
+          <div 
+            className="canvas-wrapper" 
+            style={{ position: 'relative', cursor: isDragging.current ? 'grabbing' : 'grab' }}
+            onMouseDown={handlePointerDown}
+            onMouseMove={handlePointerMove}
+            onMouseUp={handlePointerUp}
+            onMouseLeave={handlePointerUp}
+            onTouchStart={handlePointerDown}
+            onTouchMove={handlePointerMove}
+            onTouchEnd={handlePointerUp}
+          >
+            <div className="canvas">
+              <Canvas draw={draw} spaceSize={settings.lineSpacing} />
+            </div>
+
+            {/* Loading Overlay */}
+            {!isReady && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0, left: 0,
+                  width: '100%', height: '100%',
+                  bgcolor: 'rgba(255, 255, 255, 0.8)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10,
+                  flexDirection: 'column',
+                  gap: 1
+                }}
+              >
+                <CircularProgress color="secondary" />
+                <span style={{ fontSize: '0.8rem', color: '#666' }}>Loading Assets...</span>
+              </Box>
+            )}
           </div>
+          
           <Slider
-            value={curve && !vertical_bool ? 256 - position.y + fontSize * 3 : 256 - position.y}
-            onChange={(e, v) =>
-              setPosition({
-                ...position,
-                y: curve && !vertical_bool ? 256 + fontSize * 3 - v : 256 - v,
-              })
+            value={
+              settings.curve && !settings.vertical 
+                ? 256 - settings.y + settings.s * 3 
+                : 256 - settings.y
             }
-            min={-50}
-            max={256}
-            step={1}
+            onChange={(e, v) =>
+              handlePositionChange("y", 
+                settings.curve && !settings.vertical ? 256 + settings.s * 3 - v : 256 - v
+              )
+            }
+            min={-50} max={256} step={1}
             orientation="vertical"
             track={false}
             color="secondary"
           />
-          
         </div>
-
-        
 
         <div className="horizontal">
           <Slider
             className="slider-horizontal"
-            value={position.x}
-            onChange={(e, v) => setPosition({ ...position, x: v })}
-            min={0}
-            max={296}
-            step={1}
+            value={settings.x}
+            onChange={(e, v) => handlePositionChange("x", v)}
+            min={0} max={296} step={1}
             track={false}
             color="secondary"
           />
@@ -398,13 +476,10 @@ function App() {
           <div className="text_react">
             <div className="text">
               <TextField
-                label="Text"
-                size="small"
-                color="secondary"
-                value={text}
-                multiline={true}
-                fullWidth
-                onChange={(e) => setText(e.target.value)}
+                label="Text" size="small" color="secondary"
+                value={settings.text}
+                multiline fullWidth
+                onChange={(e) => updateSetting("text", e.target.value)}
               />
             </div>
 
@@ -412,16 +487,12 @@ function App() {
               <InputLabel id="font-select-label" color="secondary">Font</InputLabel>
               <Select
                 labelId="font-select-label"
-                value={font}
-                label="Font"
-                size="small"
-                onChange={(e) => setFont(e.target.value)}
-                color="secondary"
+                value={settings.font}
+                label="Font" size="small" color="secondary"
+                onChange={(e) => updateSetting("font", e.target.value)}
               >
                 {fontList.map((f) => (
-                  <MenuItem key={f.name} value={f.name}>
-                    {f.name}
-                  </MenuItem>
+                  <MenuItem key={f.name} value={f.name}>{f.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -430,168 +501,131 @@ function App() {
           <div className="settings">
             <div className="strokesize">
               <div>
-                <label>
-                  <nobr>inner Stroke Size: </nobr>
-                </label>
+                <label><nobr>Inner Stroke: </nobr></label>
                 <Slider
-                  value={colorStrokeSize}
-                  onChange={(e, v) => setColorStrokeSize(v)}
-                  min={0}
-                  max={25}
-                  step={1}
-                  track={false}
-                  color="secondary"
+                  value={settings.colorStrokeSize}
+                  onChange={(e, v) => updateSetting("colorStrokeSize", v)}
+                  min={0} max={25} step={1}
+                  track={false} color="secondary"
                 />
               </div>
-
               <div>
-                <label>
-                  <nobr>Outer Stroke Size: </nobr>
-                </label>
+                <label><nobr>Outer Stroke: </nobr></label>
                 <Slider
-                  value={whiteStrokeSize}
-                  onChange={(e, v) => setWhiteStrokeSize(v)}
-                  min={0}
-                  max={35}
-                  step={1}
-                  track={false}
-                  color="secondary"
+                  value={settings.whiteStrokeSize}
+                  onChange={(e, v) => updateSetting("whiteStrokeSize", v)}
+                  min={0} max={35} step={1}
+                  track={false} color="secondary"
                 />
               </div>
             </div>
 
             <div className="normal">
               <div>
-                <label>    Rotate:     </label>
+                <label>Rotate:</label>
                 <Slider
-                  value={rotate}
-                  onChange={(e, v) => setRotate(v)}
-                  min={-16}
-                  max={16}
-                  step={0.1}
-                  track={false}
-                  color="secondary"
+                  value={settings.r}
+                  onChange={(e, v) => updateSetting("r", v)}
+                  min={-16} max={16} step={0.1}
+                  track={false} color="secondary"
                 />
               </div>
               <div>
-                <label>
-                  <nobr>   Font Size:    </nobr>
-                </label>
+                <label><nobr>Font Size:</nobr></label>
                 <Slider
-                  value={fontSize}
-                  onChange={(e, v) => setFontSize(v)}
-                  min={5}
-                  max={100}
-                  step={1}
-                  track={false}
-                  color="secondary"
+                  value={settings.s}
+                  onChange={(e, v) => updateSetting("s", v)}
+                  min={5} max={100} step={1}
+                  track={false} color="secondary"
                 />
               </div>
               <div>
                 <label>Vertical:</label>
                 <Switch
-                  checked={vertical_bool}
-                  onChange={(e) => setVertical(e.target.checked)}
+                  checked={settings.vertical}
+                  onChange={(e) => updateSetting("vertical", e.target.checked)}
                   color="secondary"
                 />
               </div>
-
               <div>
-                <label>TopText:</label>
+                <label>TextOnTop:</label>
                 <Switch
-                  checked={textOnTop}
-                  onChange={(e) => setTextOnTop(e.target.checked)}
+                  checked={settings.textOnTop}
+                  onChange={(e) => updateSetting("textOnTop", e.target.checked)}
                   color="secondary"
                 />
               </div>
-
             </div>
+
             <div className="linesetting">
               <div>
-                <label>
-                  <nobr>LineSpacing: </nobr>
-                </label>
+                <label><nobr>LineSpacing: </nobr></label>
                 <Slider
-                  value={spaceSize}
-                  onChange={(e, v) => setSpaceSize(v)}
-                  min={0}
-                  max={100}
-                  step={1}
-                  track={false}
-                  color="secondary"
+                  value={settings.lineSpacing}
+                  onChange={(e, v) => updateSetting("lineSpacing", v)}
+                  min={0} max={100} step={1}
+                  track={false} color="secondary"
                 />
               </div>
               <div>
-                <label>
-                  <nobr>LetterSpacing: </nobr>
-                </label>
+                <label><nobr>LetterSpacing: </nobr></label>
                 <Slider
-                  value={letterSpacing}
-                  onChange={(e, v) => setLetterSpacing(v)}
-                  min={-20}
-                  max={50}
-                  step={1}
-                  track={false}
-                  color="secondary"
+                  value={settings.ls}
+                  onChange={(e, v) => updateSetting("ls", v)}
+                  min={-20} max={50} step={1}
+                  track={false} color="secondary"
                 />
               </div>
               <div>
                 <label>Curve: </label>
                 <Switch
-                  checked={curve}
-                  onChange={(e) => setCurve(e.target.checked)}
+                  checked={settings.curve}
+                  onChange={(e) => updateSetting("curve", e.target.checked)}
                   color="secondary"
                 />
               </div>
               <div>
-                <label>
-                  <nobr>Curve Factor: </nobr>
-                </label>
+                <label><nobr>Curve Factor: </nobr></label>
                 <Slider
-                  value={curvefactor}
-                  onChange={(e, v) => setCurveFactor(v)}
-                  min={3}
-                  max={10}
-                  step={0.1}
-                  track={false}
-                  color="secondary"
+                  value={settings.curveFactor}
+                  onChange={(e, v) => updateSetting("curveFactor", v)}
+                  min={3} max={10} step={0.1}
+                  track={false} color="secondary"
                 />
               </div>
-
             </div>
             
             <div className="color-pickers-container">
               <div className="color-picker-item">
                 <label>Fill Color:</label>
                 <ColorPicker
-                  color={fillColor}
-                  onChange={(color) => setFillcolor(color.hexa)}
+                  color={settings.fillColor}
+                  onChange={(color) => updateSetting("fillColor", color.hexa)}
                 />
               </div>
               <div className="color-picker-item2">
-                <label>Inner Stroke Color:</label>
+                <label>Inner Stroke:</label>
                 <ColorPicker
-                  color={strokeColor}
-                  onChange={(color) => setStrokecolor(color.hexa)}
+                  color={settings.strokeColor}
+                  onChange={(color) => updateSetting("strokeColor", color.hexa)}
                 />
               </div>
               <div className="color-picker-item3">
-                <label>Outer Stroke Color:</label>
+                <label>Outer Stroke:</label>
                 <ColorPicker
-                  color={outstrokeColor}
-                  onChange={(color) => setOutStrokecolor(color.hexa)}
+                  color={settings.outstrokeColor}
+                  onChange={(color) => updateSetting("outstrokeColor", color.hexa)}
                 />
               </div>
             </div>
-
           </div>
           
           <div className="img-loader-container">
-
             <div className="picker">
               <Picker setCharacter={setCharacter} />
             </div>
-            {/* <div className="upload-container" style={{ margin: "16px 0" }}>
+            
+            <div className="upload-container" style={{ margin: "16px 0", textAlign: "center" }}>
               <input
                 type="file"
                 accept="image/*"
@@ -600,25 +634,31 @@ function App() {
                 style={{ display: "none" }}
               />
               <label htmlFor="image-upload">
-                <Button variant="outlined" component="span" color="secondary">
-                  Upload Image
+                <Button variant="outlined" component="span" color="secondary" size="small">
+                  Upload Your Image
                 </Button>
               </label>
-            </div> */}
-
+              {customImageSrc && (
+                 <Button 
+                   size="small" 
+                   color="warning" 
+                   onClick={() => setCustomImageSrc(null)}
+                   style={{marginLeft: "10px"}}
+                 >
+                   Reset to Original
+                 </Button>
+              )}
+            </div>
           </div>
 
           <div className="buttons">
-            <Button color="secondary" onClick={copy}>
-              copy
-            </Button>
-            <Button color="secondary" onClick={download}>
-              download
-            </Button>
+            <Button color="secondary" onClick={copy}>Copy</Button>
+            <Button color="secondary" onClick={download}>Download</Button>
           </div>
         </div>
+
         <div className="footer">
-          <Button color="secondary" onClick={handleClickOpen}>
+          <Button color="secondary" onClick={() => setInfoOpen(true)}>
             About
           </Button>
         </div>
@@ -627,7 +667,7 @@ function App() {
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={openCopySnackbar}
-        onClose={handleSnackClose}
+        onClose={() => setOpenCopySnackbar(false)}
         message="Copied image to clipboard."
         key="copy"
         autoHideDuration={1500}
