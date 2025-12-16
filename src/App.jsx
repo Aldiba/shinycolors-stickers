@@ -682,7 +682,7 @@ function App() {
                             <Slider
                                 value={settings.wobblyScale}
                                 onChange={(e, v) => updateSetting("wobblyScale", v)}
-                                min={0} max={1} step={0.01}
+                                min={0} max={0.2} step={0.01}
                                 track={false} color="secondary" size="small"
                             />
                         </div>
@@ -691,7 +691,7 @@ function App() {
                             <Slider
                                 value={settings.wobblyRotation}
                                 onChange={(e, v) => updateSetting("wobblyRotation", v)}
-                                min={0} max={1} step={0.01}
+                                min={0} max={0.2} step={0.01}
                                 track={false} color="secondary" size="small"
                             />
                         </div>

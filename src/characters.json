@@ -5,16 +5,16 @@
         "character": "hazuki",
         "img": "hazuki_01.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#4BB558",
-        "outstrokeColor": "#2D2D2D",
+        "strokeColor": "#48ab53",
+        "outstrokeColor": "#93d396",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "呵呵呵",
+            "x": 60,
+            "y": 95,
+            "ls": 2,
             "r": -2,
-            "s": 42
+            "s": 56
         }
     },
     {
@@ -27,12 +27,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "呼呼呼",
+            "x": 90,
+            "y": 80,
+            "ls": 2,
             "r": -2,
-            "s": 42
+            "s": 56
         }
     },
     {
@@ -43,14 +43,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#4BB558",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "喝个茶先",
+            "x": 210,
+            "y": 60,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 60
         }
     },
     {
@@ -63,12 +63,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "摩美何意味",
             "x": 58,
-            "y": 58,
+            "y": 80,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 45
         }
     },
     {
@@ -79,14 +79,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#e962a1",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "削...",
+            "x": 50,
+            "y": 70,
+            "ls": -30,
             "r": -2,
-            "s": 42
+            "s": 55
         }
     },
     {
@@ -99,12 +99,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "🐵",
+            "x": 230,
+            "y": 80,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 80
         }
     },
     {
@@ -113,16 +113,16 @@
         "character": "sakuya",
         "img": "sakuya_01.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#f0d018",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "加个好友",
             "x": 58,
-            "y": 58,
+            "y": 70,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 47
         }
     },
     {
@@ -133,14 +133,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#ff623b",
         "outstrokeColor": "#2a687e",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "才八点",
+            "x": 220,
+            "y": 72,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 70
         }
     },
     {
@@ -151,14 +151,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#368ecb",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "吃了没",
+            "x": 55,
+            "y": 80,
+            "ls": 5,
             "r": -2,
-            "s": 42
+            "s": 80
         }
     },
     {
@@ -169,11 +169,11 @@
         "fillColor": "#ffffff",
         "strokeColor": "#368ecb",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "我还是消失吧",
+            "x": 30,
+            "y": 40,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -187,14 +187,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#B9515B",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
+            "text": "收心立",
+            "x": 220,
             "y": 58,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 48
         }
     },
     {
@@ -203,16 +203,16 @@
         "character": "meguru",
         "img": "meguru_02.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#B9515B",
+        "strokeColor": "#eb8a35",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "收到！",
+            "x": 50,
+            "y": 90,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 70
         }
     },
     {
@@ -259,11 +259,11 @@
         "fillColor": "#FFFFFF",
         "strokeColor": "#6498ff",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "求此虫冷知识",
+            "x": 30,
+            "y": 40,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -274,14 +274,14 @@
         "name": "amana_01",
         "character": "amana",
         "img": "amana_01.png",
-        "fillColor": "#FF558D",
+        "fillColor": "#ffffff",
         "strokeColor": "#FF3A7B",
-        "outstrokeColor": "#ffffff",
+        "outstrokeColor": "#301818",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "收时尚小垃圾",
+            "x": 50,
+            "y": 80,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -297,12 +297,12 @@
         "outstrokeColor": "#FF99CB",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "我全都要",
+            "x": 60,
+            "y": 80,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 50
         }
     },
     {
@@ -315,11 +315,11 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "好甜像我一样",
+            "x": 40,
+            "y": 240,
             "ls": 0,
-            "r": -2,
+            "r": 0,
             "s": 42
         }
     },
@@ -333,12 +333,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
-            "text": "重新选字体\n结束后\n请在加载",
-            "x": 150,
-            "y": 80,
-            "ls": 0,
+            "text": "好宅哦",
+            "x": 220,
+            "y": 85,
+            "ls": 2,
             "r": -2,
-            "s": 42
+            "s": 60
         }
     },
     {
@@ -367,14 +367,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#CE797D",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
+            "text": "你是高手？",
             "x": 58,
-            "y": 58,
-            "ls": 0,
+            "y": 45,
+            "ls": 5,
             "r": -2,
-            "s": 42
+            "s": 45
         }
     },
     {
@@ -405,12 +405,12 @@
         "outstrokeColor": "#865C46",
         "vertical": false,
         "defaultText": {
-            "text": "howaa",
+            "text": "哼",
             "x": 98,
             "y": 66,
             "ls": 0,
             "r": -4,
-            "s": 43
+            "s": 70
         }
     },
     {
@@ -421,14 +421,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#575E7C",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
+            "text": "跪求",
             "x": 58,
-            "y": 58,
+            "y": 115,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 70
         }
     },
     {
@@ -439,13 +439,13 @@
         "fillColor": "#ffffff",
         "strokeColor": "#9E8683",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": " 看的羞死了\n给我",
+            "x": 220,
+            "y": 40,
             "ls": 0,
-            "r": -2,
+            "r": 1,
             "s": 42
         }
     },
@@ -473,16 +473,16 @@
         "character": "hinana",
         "img": "hinana_01.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#F45015",
-        "outstrokeColor": "#2D2D2D",
+        "strokeColor": "#f39f37",
+        "outstrokeColor": "#e74d00",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "啊哈",
+            "x": 60,
+            "y": 53,
             "ls": 0,
-            "r": -2,
-            "s": 42
+            "r": 1,
+            "s": 55
         }
     },
     {
@@ -491,16 +491,16 @@
         "character": "hinana",
         "img": "hinana_02.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#F45015",
-        "outstrokeColor": "#2D2D2D",
+        "strokeColor": "#f39f37",
+        "outstrokeColor": "#e74d00",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "呀哈~",
+            "x": 70,
+            "y": 70,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 60
         }
     },
     {
@@ -508,16 +508,16 @@
         "name": "toru_0",
         "character": "toru",
         "img": "asakuratoru-0_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "我有五根手指",
-            "x": 98,
-            "y": 66,
+            "text": "加我粉丝团",
+            "x": 90,
+            "y": 50,
             "ls": 0,
-            "r": -4,
+            "r": 2,
             "s": 43
         }
     },
@@ -526,14 +526,14 @@
         "name": "toru_1",
         "character": "toru",
         "img": "asakuratoru-1_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "请不要这样",
             "x": 58,
-            "y": 58,
+            "y": 70,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -544,12 +544,12 @@
         "name": "toru_2",
         "character": "toru",
         "img": "asakuratoru-2_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -562,14 +562,14 @@
         "name": "toru_3",
         "character": "toru",
         "img": "asakuratoru-3_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "才八点",
+            "x": 180,
+            "y": 62,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -580,16 +580,16 @@
         "name": "toru_4",
         "character": "toru",
         "img": "asakuratoru-4_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "GOOO",
+            "x": 60,
+            "y": 235,
             "ls": 0,
-            "r": -2,
+            "r": -0.5,
             "s": 42
         }
     },
@@ -598,12 +598,12 @@
         "name": "toru_5",
         "character": "toru",
         "img": "asakuratoru-5_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "已记录",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -616,17 +616,17 @@
         "name": "toru_6",
         "character": "toru",
         "img": "asakuratoru-7_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "OK!",
-            "x": 58,
-            "y": 65,
+            "text": "下班",
+            "x": 40,
+            "y": 235,
             "ls": 0,
             "r": -1.5,
-            "s": 42
+            "s": 50
         }
     },
     {
@@ -634,14 +634,14 @@
         "name": "toru_7",
         "character": "toru",
         "img": "asakuratoru-8_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "....",
             "x": 58,
-            "y": 58,
+            "y": 65,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -652,12 +652,12 @@
         "name": "toru_8",
         "character": "toru",
         "img": "asakuratoru-10_1.png",
-        "fillColor": "#8CBDF2",
-        "strokeColor": "#2E2430",
-        "outstrokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#29b1e3",
+        "outstrokeColor": "#000000",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -693,12 +693,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "看弱智",
+            "x": 40,
+            "y": 75,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 48
         }
     },
     {
@@ -709,12 +709,12 @@
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "难道说？",
+            "x": 250,
+            "y": 50,
+            "ls": 2,
             "r": -2,
             "s": 42
         }
@@ -729,7 +729,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -745,14 +745,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
-            "r": -2,
-            "s": 42
+            "text": "人言否？",
+            "x": 30,
+            "y": 70,
+            "ls": 5,
+            "r": -1,
+            "s": 50
         }
     },
     {
@@ -765,12 +765,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "剪刀手",
             "x": 58,
             "y": 58,
             "ls": 0,
-            "r": -2,
-            "s": 42
+            "r": -1,
+            "s": 50
         }
     },
     {
@@ -781,14 +781,14 @@
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
-            "ls": 0,
+            "text": "节哀顺变",
+            "x": 38,
+            "y": 80,
+            "ls": 2,
             "r": -2,
-            "s": 42
+            "s": 50
         }
     },
     {
@@ -801,12 +801,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "姐就是女王",
             "x": 58,
             "y": 58,
             "ls": 0,
-            "r": -2,
-            "s": 42
+            "r": 0,
+            "s": 45
         }
     },
     {
@@ -815,15 +815,15 @@
         "character": "hinana",
         "img": "ichikawahinana-0_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "五根手指",
+            "x": 65,
+            "y": 65,
             "ls": 0,
-            "r": -2,
+            "r": -1,
             "s": 42
         }
     },
@@ -833,15 +833,15 @@
         "character": "hinana",
         "img": "ichikawahinana-1_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
+            "text": "。。。",
+            "x": 200,
             "y": 58,
             "ls": 0,
-            "r": -2,
+            "r": 1,
             "s": 42
         }
     },
@@ -851,16 +851,16 @@
         "character": "hinana",
         "img": "ichikawahinana-2_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
+            "text": "来支持了",
+            "x": 230,
             "y": 58,
-            "ls": 0,
+            "ls": 4,
             "r": -2,
-            "s": 42
+            "s": 55
         }
     },
     {
@@ -869,16 +869,16 @@
         "character": "hinana",
         "img": "ichikawahinana-5_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "早八",
             "x": 58,
-            "y": 58,
+            "y": 65,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 55
         }
     },
     {
@@ -887,16 +887,16 @@
         "character": "hinana",
         "img": "ichikawahinana-6_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
-        "vertical": false,
+        "vertical": true,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
+            "text": "高山仰止",
+            "x": 230,
             "y": 58,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 55
         }
     },
     {
@@ -905,15 +905,15 @@
         "character": "hinana",
         "img": "ichikawahinana-7_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "。。。。",
             "x": 58,
             "y": 58,
             "ls": 0,
-            "r": -2,
+            "r": 0,
             "s": 42
         }
     },
@@ -923,16 +923,16 @@
         "character": "hinana",
         "img": "ichikawahinana-8_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "咕啊",
+            "x": 60,
+            "y": 80,
             "ls": 0,
             "r": -2,
-            "s": 42
+            "s": 70
         }
     },
     {
@@ -941,11 +941,11 @@
         "character": "hinana",
         "img": "ichikawahinana-12_1.png",
         "fillColor": "#ffffff",
-        "strokeColor": "#ff8800",
+        "strokeColor": "#e39c4a",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "透前辈~",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -963,9 +963,9 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "炼铜癖好恶心...",
+            "text": "炼铜癖好恶心",
             "x": 30,
-            "y": 70,
+            "y": 80,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -999,9 +999,9 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Pya..",
-            "x": 58,
-            "y": 58,
+            "text": "Pya...！",
+            "x": 72,
+            "y": 70,
             "ls": 0,
             "r": -2,
             "s": 42
@@ -1035,7 +1035,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "Pya...",
             "x": 58,
             "y": 58,
             "ls": 0,
@@ -1053,12 +1053,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
-            "x": 58,
-            "y": 58,
+            "text": "轻轻松松啦",
+            "x": 40,
+            "y": 65,
             "ls": 0,
-            "r": -2,
-            "s": 42
+            "r": -1,
+            "s": 50
         }
     },
     {
@@ -1071,7 +1071,7 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
-            "text": "Nothing",
+            "text": "",
             "x": 58,
             "y": 58,
             "ls": 0,
