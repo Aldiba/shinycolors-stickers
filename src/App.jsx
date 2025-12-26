@@ -134,11 +134,6 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  // ... (后续所有代码保持不变) ...
-  
-  // 为了确保代码完整性，以下是接下来的逻辑摘要，直接复制粘贴即可覆盖原文件
-  // -----------------------------------------------------------------
-
   useEffect(() => {
     const charData = characters[character];
     const def = charData.defaultText;
