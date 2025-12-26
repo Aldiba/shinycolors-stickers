@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback, useDeferredValue } fro
 // 字体引入
 import YurukaStd from "./fonts/YurukaStd.woff2";
 import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
-import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff2"; // 后台加载
+import YouWangFangYuanTi from "./fonts/攸望方圆体-中.woff2";
 
 // 样式与组件
 import "./App.css";
@@ -26,10 +26,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ColorPicker from "@uiw/react-color-chrome";
 
-// 工具类
+// 新增：引入 ToggleButton 用于语言切换
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+// 工具类与本地化
 import getConfiguration from "./utils/config";
 import log from "./utils/log";
 import { preloadFont } from "./utils/preload";
+import locales from "./locales"; // 引入本地化文件
 
 const { ClipboardItem } = window;
 
@@ -43,21 +48,36 @@ const CONSTANTS = {
 };
 
 const fontList = [
-  { name: "YurukaStd", path: YurukaStd },       // 索引 0: 关键
-  { name: "SSFangTangTi", path: SSFangTangTi }, // 索引 1: 关键
-  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi }, // 索引 2: 非关键 (后台加载)
+  { name: "YurukaStd", path: YurukaStd },
+  { name: "SSFangTangTi", path: SSFangTangTi },
+  { name: "YouWangFangYuanTi", path: YouWangFangYuanTi },
 ];
 
 function App() {
-  // ... (状态定义保持不变) ...
+  // --- 本地化状态 ---
+  const [lang, setLang] = useState("zh"); // 默认为中文
+  // 辅助函数：获取当前语言的文本
+  const t = (key) => {
+    return locales[lang][key] || key;
+  };
+
+  const handleLangChange = (event, newLang) => {
+    if (newLang !== null) {
+      setLang(newLang);
+    }
+  };
+
+  // --- 全局配置与UI状态 ---
   const [config, setConfig] = useState(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
+  // --- 核心绘图状态 ---
   const [character, setCharacter] = useState(18);
   const [customImageSrc, setCustomImageSrc] = useState(null);
   const [loadedImage, setLoadedImage] = useState(null);
+  
   const [seed, setSeed] = useState(Math.floor(Math.random() * 1000)); 
 
   const [settings, setSettings] = useState({
@@ -88,52 +108,35 @@ function App() {
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
 
-  // --- 核心修改：初始化与字体预加载 ---
+  // --- 初始化与字体预加载 ---
   useEffect(() => {
     getConfiguration().then(setConfig).catch(console.error);
     const controller = new AbortController();
     
     const loadFonts = async () => {
-      // 1. 定义关键字体 (前两个)
       const criticalFonts = fontList.slice(0, 2);
-      // 2. 定义非关键字体 (第三个及以后)
       const optionalFonts = fontList.slice(2);
 
-      // 3. 立即触发关键字体的加载
       const criticalPromises = criticalFonts.map(f => 
         preloadFont(f.name, f.path, controller.signal)
           .catch(err => console.error(`Failed to load critical font ${f.name}`, err))
       );
 
-      // 4. 立即触发非关键字体的加载 (让它在后台跑，我们不 await 它)
       optionalFonts.forEach(f => {
         preloadFont(f.name, f.path, controller.signal)
-          .then(() => {
-             console.log(`Optional font loaded: ${f.name}`);
-             // 可选：如果用户碰巧选了第三个字体，这里可以强制重绘一次
-             // 但通常不需要，因为 Canvas 下一次操作会自动用上
-          })
           .catch(err => console.error(`Failed to load optional font ${f.name}`, err));
       });
 
-      // 5. 只等待关键字体完成！
       await Promise.all(criticalPromises);
-      
-      // 等待浏览器解析关键字体
-      // 注意：document.fonts.ready 可能会等待所有 pending 的字体，
-      // 为了让 UI 更快解除锁定，我们可以假设 Promise.all 结束后，关键字体已经可用。
-      // 如果你想极致快，可以把下面这行 await document.fonts.ready 注释掉，
-      // 但保留它通常比较稳妥，防止 FOUT (字体闪烁)。
-      // 这里我们为了速度，选择相信 preloadFont 内部的 font.load() 已经足够。
-      
       console.log("Critical fonts loaded! UI Unlocked.");
-      setFontsLoaded(true); // 解除 Loading 遮罩
+      setFontsLoaded(true);
     };
 
     loadFonts();
     return () => controller.abort();
   }, []);
 
+  // --- 逻辑部分 (保持不变) ---
   useEffect(() => {
     const charData = characters[character];
     const def = charData.defaultText;
@@ -155,7 +158,6 @@ function App() {
     setCustomImageSrc(null);
   }, [character]);
 
-  // --- 图片加载逻辑 ---
   useEffect(() => {
     const img = new Image();
     const src = customImageSrc || ("img/" + characters[character].img);
@@ -171,7 +173,6 @@ function App() {
     };
   }, [character, customImageSrc]);
 
-  // --- 辅助函数 ---
   const updateSetting = (key, value) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
   };
@@ -193,7 +194,6 @@ function App() {
     }
   };
 
-  // --- 拖拽交互逻辑 ---
   const handlePointerDown = (e) => {
     isDragging.current = true;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -224,7 +224,6 @@ function App() {
     isDragging.current = false;
   };
 
-  // --- 绘图核心逻辑 ---
   const draw = useCallback((ctx) => {
     if (!loadedImage) return;
 
@@ -252,7 +251,7 @@ function App() {
         text, font, s, x, y, r, fillColor, strokeColor, outstrokeColor,
         whiteStrokeSize, colorStrokeSize, lineSpacing, ls,
         vertical, curve, curveFactor, 
-        wobbly, wobblyScale, wobblyRotation // 引入新变量
+        wobbly, wobblyScale, wobblyRotation 
       } = currentSettings;
       
       ctx.font = `${s}px ${font}, SSFangTangTi, YouWangFangYuanTi`;
@@ -279,18 +278,10 @@ function App() {
         }
       };
 
-      // 封装：带有 Wobbly 效果的绘制器
       const drawEffectiveChar = (char, dx, dy, pass, index) => {
         if (wobbly) {
-          // 伪随机数 (-1 ~ 1)
           const pseudoRandom = Math.sin(currentSeed + index * 12.34); 
-          
-          // 大小控制： 1 ± (随机数 * 强度)
-          // 如果 wobblyScale 为 0.3，则缩放范围约 0.7 ~ 1.3
           const scale = 1 + (pseudoRandom * wobblyScale); 
-
-          // 角度控制： 随机数 * 强度 (弧度)
-          // 如果 wobblyRotation 为 0.5，则旋转范围约 -0.5rad ~ 0.5rad
           const rotation = pseudoRandom * wobblyRotation;
 
           ctx.save();
@@ -352,7 +343,6 @@ function App() {
           }
         }
       } else {
-        // --- 正常模式 ---
         if (vertical) {
           for (let pass = 0; pass < 2; pass++) {
             let xOffset = 0;
@@ -368,7 +358,6 @@ function App() {
             }
           }
         } else {
-          // 横排
           for (let pass = 0; pass < 2; pass++) {
             let yOffset = 0;
             charCounter = 0;
@@ -440,7 +429,7 @@ function App() {
       setConfig(prev => prev ? ({ ...prev, total: prev.total + 1 }) : null);
     } catch (err) {
       console.error("Copy failed", err);
-      alert("Copy failed. Please try downloading instead.");
+      alert(t("copy_failed"));
     }
   };
 
@@ -458,15 +447,36 @@ function App() {
   const isReady = loadedImage && fontsLoaded;
 
   return (
-    <div className="App">
-      <Info open={infoOpen} handleClose={() => setInfoOpen(false)} config={config} />
+    <div className="App"
+    // style={{ 
+    //   fontFamily: '"YurukaStd", "SSFangTangTi", "YouWangFangYuanTi", sans-serif' 
+    // }}
+    >
+      <Info open={infoOpen} handleClose={() => setInfoOpen(false)} config={config} lang={lang} t={t} />
       
-      <div className="counter">
-        Total Stickers you made: {config?.total || "..."}
+      {/* 语言切换栏 (替代原来的计数器) */}
+      <div className="counter" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+        <span style={{ fontSize: '0.9rem', color: '#666' }}>{t("language")}:</span>
+        <ToggleButtonGroup
+          value={lang}
+          exclusive
+          onChange={handleLangChange}
+          size="small"
+          color="secondary"
+          sx={{ height: '30px' }}
+        >
+          <ToggleButton value="zh" sx={{ fontSize: '0.8rem', padding: '5px 10px' }}>中</ToggleButton>
+          <ToggleButton value="ja" sx={{ fontSize: '0.8rem', padding: '5px 10px' }}>日</ToggleButton>
+          <ToggleButton value="en" sx={{ fontSize: '0.8rem', padding: '5px 10px' }}>En</ToggleButton>
+        </ToggleButtonGroup>
       </div>
 
       <div className="container">
-        <div className="vertical">
+        <div className="vertical" style={{ 
+            display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '16px' 
+        }}>
+          <div style={{ width: '50px', flexShrink: 0 }}></div>
+
           <div 
             className="canvas-wrapper" 
             style={{ position: 'relative', cursor: isDragging.current ? 'grabbing' : 'grab' }}
@@ -492,27 +502,62 @@ function App() {
                 }}
               >
                 <CircularProgress color="secondary" />
-                <span style={{ fontSize: '0.8rem', color: '#666' }}>Loading Assets...</span>
+                <span style={{ fontSize: '0.8rem', color: '#666' }}>{t("loading_assets")}</span>
               </Box>
             )}
           </div>
           
-          <Slider
-            value={
-              settings.curve && !settings.vertical 
-                ? 256 - settings.y + settings.s * 3 
-                : 256 - settings.y
-            }
-            onChange={(e, v) =>
-              handlePositionChange("y", 
-                settings.curve && !settings.vertical ? 256 + settings.s * 3 - v : 256 - v
-              )
-            }
-            min={-50} max={256} step={1}
-            orientation="vertical"
-            track={false}
-            color="secondary"
-          />
+          <div className="vertical-controls" style={{
+              display: 'flex', flexDirection: 'row', height: '256px', alignItems: 'center',
+              width: '80px', flexShrink: 0
+          }}>
+            <Slider
+                value={
+                settings.curve && !settings.vertical 
+                    ? 256 - settings.y + settings.s * 3 
+                    : 256 - settings.y
+                }
+                onChange={(e, v) =>
+                handlePositionChange("y", 
+                    settings.curve && !settings.vertical ? 256 + settings.s * 3 - v : 256 - v
+                )
+                }
+                min={-50} max={256} step={1}
+                orientation="vertical"
+                track={false}
+                color="secondary"
+                style={{ height: '100%' }} 
+            />
+            
+            <div style={{
+                display: 'flex', flexDirection: 'column', justifyContent: 'space-around', 
+                height: '80%', flex: 1 
+            }}>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <span style={{fontSize: '0.8rem', fontWeight: 'bold', color: '#555', marginBottom: '4px', whiteSpace: 'nowrap', transform: 'scale(0.9)'}}>
+                        {t("vertical")}
+                    </span>
+                    <Switch
+                        checked={settings.vertical}
+                        onChange={(e) => updateSetting("vertical", e.target.checked)}
+                        color="secondary"
+                        style={{ margin: '0px' }}
+                    />
+                </div>
+
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <span style={{fontSize: '0.8rem', fontWeight: 'bold', color: '#555', marginBottom: '4px', whiteSpace: 'nowrap', transform: 'scale(0.9)'}}>
+                        {t("text_on_top")}
+                    </span>
+                    <Switch
+                        checked={settings.textOnTop}
+                        onChange={(e) => updateSetting("textOnTop", e.target.checked)}
+                        color="secondary"
+                        style={{ margin: '0px' }}
+                    />
+                </div>
+            </div>
+          </div>
         </div>
 
         <div className="horizontal">
@@ -528,7 +573,7 @@ function App() {
           <div className="text_react">
             <div className="text">
               <TextField
-                label="Text" size="small" color="secondary"
+                label={t("text")} size="small" color="secondary"
                 value={settings.text}
                 multiline fullWidth
                 onChange={(e) => updateSetting("text", e.target.value)}
@@ -536,11 +581,11 @@ function App() {
             </div>
 
             <FormControl fullWidth>
-              <InputLabel id="font-select-label" color="secondary">Font</InputLabel>
+              <InputLabel id="font-select-label" color="secondary">{t("font")}</InputLabel>
               <Select
                 labelId="font-select-label"
                 value={settings.font}
-                label="Font" size="small" color="secondary"
+                label={t("font")} size="small" color="secondary"
                 onChange={(e) => updateSetting("font", e.target.value)}
               >
                 {fontList.map((f) => (
@@ -550,190 +595,176 @@ function App() {
             </FormControl>
           </div>
 
-          <div className="settings">
-            <div className="strokesize">
-              <div>
-                <label><nobr>Inner Stroke: </nobr></label>
+          <div className="settings" style = {{fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
+            
+            <div className="strokesize" style={{ display: 'flex', gap: '20px', width: '100%' ,fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
+              <div style={{ flex: 1 }}>
+                <label><nobr>{t("inner_stroke")}: </nobr></label>
                 <Slider
                   value={settings.colorStrokeSize}
                   onChange={(e, v) => updateSetting("colorStrokeSize", v)}
                   min={0} max={25} step={1}
                   track={false} color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
-              <div>
-                <label><nobr>Outer Stroke: </nobr></label>
+              <div style={{ flex: 1 }}>
+                <label><nobr>{t("outer_stroke")}: </nobr></label>
                 <Slider
                   value={settings.whiteStrokeSize}
                   onChange={(e, v) => updateSetting("whiteStrokeSize", v)}
                   min={0} max={35} step={1}
                   track={false} color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
             </div>
 
-            <div className="normal">
-              <div>
-                <label>Rotate:</label>
+            <div className="normal" style={{ display: 'flex', gap: '20px', width: '100%' ,fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
+              <div style={{ flex: 1 }}>
+                <label>{t("rotate")}:</label>
                 <Slider
                   value={settings.r}
                   onChange={(e, v) => updateSetting("r", v)}
                   min={-16} max={16} step={0.1}
                   track={false} color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
-              <div>
-                <label><nobr>Font Size:</nobr></label>
+              <div style={{ flex: 1}} >
+                <label><nobr>{t("font_size")}:</nobr></label>
                 <Slider
                   value={settings.s}
                   onChange={(e, v) => updateSetting("s", v)}
                   min={5} max={100} step={1}
                   track={false} color="secondary"
-                />
-              </div>
-              
-              <div>
-                <label>TextOnTop:</label>
-                <Switch
-                  checked={settings.textOnTop}
-                  onChange={(e) => updateSetting("textOnTop", e.target.checked)}
-                  color="secondary"
-                />
-              </div>
-              <div>
-                <label>Vertical:</label>
-                <Switch
-                  checked={settings.vertical}
-                  onChange={(e) => updateSetting("vertical", e.target.checked)}
-                  color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
             </div>
 
-            <div className="linesetting">
-              <div>
-                <label><nobr>LineSpacing: </nobr></label>
+            <div className="linesetting" style={{ display: 'flex', gap: '20px', width: '100%' ,fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
+              <div style={{ flex: 1 }}>
+                <label><nobr>{t("line_spacing")}: </nobr></label>
                 <Slider
                   value={settings.lineSpacing}
                   onChange={(e, v) => updateSetting("lineSpacing", v)}
                   min={0} max={100} step={1}
                   track={false} color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
-              <div>
-                <label><nobr>LetterSpacing: </nobr></label>
+              <div style={{ flex: 1 }}>
+                <label><nobr>{t("letter_spacing")}: </nobr></label>
                 <Slider
                   value={settings.ls}
                   onChange={(e, v) => updateSetting("ls", v)}
                   min={-20} max={50} step={1}
                   track={false} color="secondary"
-                />
-              </div>
-              <div>
-                <label>Curve: </label>
-                <Switch
-                  checked={settings.curve}
-                  onChange={(e) => updateSetting("curve", e.target.checked)}
-                  color="secondary"
-                />
-              </div>
-              <div>
-                <label><nobr>Curve Factor: </nobr></label>
-                <Slider
-                  value={settings.curveFactor}
-                  onChange={(e, v) => updateSetting("curveFactor", v)}
-                  min={3} max={10} step={0.1}
-                  track={false} color="secondary"
+                  style={{ width: '100%' }}
                 />
               </div>
             </div>
 
-            {/* --- 新增：Wobbly Section (独立一行，位于 spacing 下面) --- */}
-            <div className="wobbly-section" style={{
-              display: 'flex', flexDirection: 'column', gap: '8px',
-              padding: '10px', border: '1px solid #eee', borderRadius: '8px',
-              margin: '10px 0'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{display:'flex', alignItems:'center'}}>
-                      <label style={{marginRight: '8px', fontWeight: 'bold'}}>Wobbly:</label>
-                      <Switch
-                        checked={settings.wobbly}
-                        onChange={(e) => updateSetting("wobbly", e.target.checked)}
-                        color="secondary"
-                      />
-                  </div>
-                  
-                  {settings.wobbly && (
-                    <div style={{display:'flex', gap: '8px', alignItems: 'center'}}>
-                         {/* 种子输入框 */}
-                        <TextField
-                           label="Seed"
-                           type="number"
-                           size="small"
-                           variant="outlined"
-                           value={seed}
-                           onChange={handleSeedChange}
-                           color="secondary"
-                           style={{width: '80px'}}
-                           inputProps={{style: {padding: '5px 8px'}}}
-                           InputLabelProps={{style: {fontSize: '0.8rem'}}}
-                        />
-                        <Button 
-                            size="small" 
-                            onClick={generateNewSeed}
+            <div className="effects-row" style={{ display: 'flex', gap: '10px', margin: '10px 0', width: '100%' ,fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
+                <div style={{ flex: 1, border: '1px solid #eee', borderRadius: '8px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <label style={{fontWeight: 'bold', fontSize: '0.9rem'}}>{t("curve")}</label>
+                        <Switch
+                            checked={settings.curve}
+                            onChange={(e) => updateSetting("curve", e.target.checked)}
                             color="secondary"
-                            variant="outlined"
-                            style={{minWidth: '30px', padding: '4px'}}
-                            title="Random Seed"
-                        >
-                            🎲
-                        </Button>
+                            size="small"
+                        />
                     </div>
-                  )}
+                    {settings.curve && (
+                        <div>
+                            <label style={{ fontSize: '0.75rem' }}>{t("curve_factor")}:</label>
+                            <Slider
+                                value={settings.curveFactor}
+                                onChange={(e, v) => updateSetting("curveFactor", v)}
+                                min={3} max={10} step={0.1}
+                                track={false} color="secondary" size="small"
+                                style={{ width: '100%' }}
+                            />
+                        </div>
+                    )}
                 </div>
 
-                {settings.wobbly && (
-                    <div style={{display: 'flex', gap: '15px'}}>
-                        <div style={{flex: 1}}>
-                            <label style={{fontSize: '0.8rem'}}>Scale Chaos:</label>
-                            <Slider
-                                value={settings.wobblyScale}
-                                onChange={(e, v) => updateSetting("wobblyScale", v)}
-                                min={0} max={0.2} step={0.01}
-                                track={false} color="secondary" size="small"
-                            />
-                        </div>
-                        <div style={{flex: 1}}>
-                            <label style={{fontSize: '0.8rem'}}>Rotate Chaos:</label>
-                            <Slider
-                                value={settings.wobblyRotation}
-                                onChange={(e, v) => updateSetting("wobblyRotation", v)}
-                                min={0} max={0.2} step={0.01}
-                                track={false} color="secondary" size="small"
+                <div style={{ flex: 1, border: '1px solid #eee', borderRadius: '8px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <label style={{fontWeight: 'bold', fontSize: '0.9rem'}}>{t("wobbly")}</label>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            {settings.wobbly && (
+                                <div style={{display:'flex', alignItems:'center', marginRight: '5px'}}>
+                                    <TextField
+                                        label={t("seed")}
+                                        variant="standard"
+                                        value={seed}
+                                        onChange={handleSeedChange}
+                                        color="secondary"
+                                        inputProps={{style: {padding: 0, fontSize: '0.8rem', width: '40px', textAlign: 'center'}}}
+                                        InputLabelProps={{ shrink: true, style: { fontSize: '0.7rem' } }}
+                                    />
+                                    <Button 
+                                        size="small" onClick={generateNewSeed} color="secondary" 
+                                        style={{minWidth: '20px', padding: 0, marginLeft: '2px'}}
+                                        title={t("new_seed")}
+                                    >🎲</Button>
+                                </div>
+                            )}
+                            <Switch
+                                checked={settings.wobbly}
+                                onChange={(e) => updateSetting("wobbly", e.target.checked)}
+                                color="secondary"
+                                size="small"
                             />
                         </div>
                     </div>
-                )}
+                    {settings.wobbly && (
+                        <div style={{display: 'flex', gap: '5px'}}>
+                             <div style={{flex: 1}}>
+                                <label style={{ fontSize: '0.75rem' }}>{t("scale_chaos")}:</label>
+                                <Slider
+                                    value={settings.wobblyScale}
+                                    onChange={(e, v) => updateSetting("wobblyScale", v)}
+                                    min={0} max={1} step={0.01}
+                                    track={false} color="secondary" size="small"
+                                    style={{ width: '100%' }}
+                                />
+                             </div>
+                             <div style={{flex: 1}}>
+                                <label style={{ fontSize: '0.75rem' }}>{t("rotate_chaos")}:</label>
+                                <Slider
+                                    value={settings.wobblyRotation}
+                                    onChange={(e, v) => updateSetting("wobblyRotation", v)}
+                                    min={0} max={1} step={0.01}
+                                    track={false} color="secondary" size="small"
+                                    style={{ width: '100%' }}
+                                />
+                             </div>
+                        </div>
+                    )}
+                </div>
             </div>
             
-            <div className="color-pickers-container">
+            <div className="color-pickers-container" style = {{fontFamily: "YurukaStd, SSFangTangTi, YouWangFangYuanTi, sans-serif"}}>
               <div className="color-picker-item">
-                <label>Fill Color:</label>
+                <label>{t("fill_color")}:</label>
                 <ColorPicker
                   color={settings.fillColor}
                   onChange={(color) => updateSetting("fillColor", color.hexa)}
                 />
               </div>
               <div className="color-picker-item2">
-                <label>Inner Stroke:</label>
+                <label>{t("inner_stroke_color")}:</label>
                 <ColorPicker
                   color={settings.strokeColor}
                   onChange={(color) => updateSetting("strokeColor", color.hexa)}
                 />
               </div>
               <div className="color-picker-item3">
-                <label>Outer Stroke:</label>
+                <label>{t("outer_stroke_color")}:</label>
                 <ColorPicker
                   color={settings.outstrokeColor}
                   onChange={(color) => updateSetting("outstrokeColor", color.hexa)}
@@ -757,7 +788,7 @@ function App() {
               />
               <label htmlFor="image-upload">
                 <Button variant="outlined" component="span" color="secondary" size="small">
-                  Upload Your Image
+                  {t("upload_your_image")}
                 </Button>
               </label>
               {customImageSrc && (
@@ -767,21 +798,21 @@ function App() {
                    onClick={() => setCustomImageSrc(null)}
                    style={{marginLeft: "10px"}}
                  >
-                   Reset to Original
+                   {t("reset_to_original")}
                  </Button>
               )}
             </div>
           </div>
 
           <div className="buttons">
-            <Button color="secondary" onClick={copy}>Copy</Button>
-            <Button color="secondary" onClick={download}>Download</Button>
+            <Button color="secondary" onClick={copy}>{t("copy")}</Button>
+            <Button color="secondary" onClick={download}>{t("download")}</Button>
           </div>
         </div>
 
         <div className="footer">
           <Button color="secondary" onClick={() => setInfoOpen(true)}>
-            About
+            {t("about")}
           </Button>
         </div>
       </div>
@@ -790,7 +821,7 @@ function App() {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={openCopySnackbar}
         onClose={() => setOpenCopySnackbar(false)}
-        message="Copied image to clipboard."
+        message={t("copied_to_clipboard")}
         key="copy"
         autoHideDuration={1500}
       />

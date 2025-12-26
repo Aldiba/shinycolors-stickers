@@ -334,12 +334,12 @@
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
-            "text": "你是高手？",
+            "text": "是大佬",
             "x": 58,
-            "y": 45,
+            "y": 100,
             "ls": 5,
             "r": -2,
-            "s": 45
+            "s": 55
         }
     },
     {
