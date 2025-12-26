@@ -123,8 +123,8 @@ const locales = {
       "curve_factor": "カーブ強度",
   
       // Wobbly Section
-      "wobbly_effect": "ぐにゃぐにゃ効果",
-      "wobbly": "ぐにゃぐにゃ",
+      "wobbly_effect": "ぐにゃ効果",
+      "wobbly": "ぐにゃ",
       "seed": "シード",
       "new_seed": "新しいシード",
       "scale_chaos": "スケール度",
