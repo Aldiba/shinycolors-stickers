@@ -28,13 +28,13 @@ const locales = {
       "letter_spacing": "字间距",
       
       // Curve Section
-      "curve_effect": "曲线效果",
-      "curve": "曲线",
-      "curve_factor": "曲线强度",
+      "curve_effect": "弧度效果",
+      "curve": "弧度",
+      "curve_factor": "弧度强度",
   
       // Wobbly Section
-      "wobbly_effect": "凹凸效果",
-      "wobbly": "凹凸感",
+      "wobbly_effect": "随机化",
+      "wobbly": "随机化",
       "seed": "种子",
       "new_seed": "新种子",
       "scale_chaos": "大小混乱",

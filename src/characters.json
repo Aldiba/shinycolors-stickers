@@ -76,8 +76,8 @@
         "name": "mano_02",
         "character": "mano",
         "img": "mano_02.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#EF9070",
+        "fillColor": "#EF9070",
+        "strokeColor": "#ffffff",
         "outstrokeColor": "#865C46",
         "vertical": false,
         "defaultText": {
@@ -94,9 +94,9 @@
         "name": "hiori_01",
         "character": "hiori",
         "img": "hiori_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#368ecb",
-        "outstrokeColor": "#2D2D2D",
+        "fillColor": "#5ca0d0",
+        "strokeColor": "#ffffff",
+        "outstrokeColor": "#3D3D3D",
         "vertical": true,
         "defaultText": {
             "text": "吃了没",
@@ -112,8 +112,8 @@
         "name": "hiori_02",
         "character": "hiori",
         "img": "hiori_02.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#368ecb",
+        "fillColor": "#368ecb",
+        "strokeColor": "#ffffff",
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
@@ -148,9 +148,9 @@
         "name": "meguru_02",
         "character": "meguru",
         "img": "meguru_02.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#eb8a35",
-        "outstrokeColor": "#2D2D2D",
+        "fillColor": "#ffc832",
+        "strokeColor": "#ffffff",
+        "outstrokeColor": "#7a5432",
         "vertical": true,
         "defaultText": {
             "text": "收到！",
@@ -239,8 +239,8 @@
         "name": "sakuya_01",
         "character": "sakuya",
         "img": "sakuya_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#f0d018",
+        "fillColor": "#f0d018",
+        "strokeColor": "#ffffff",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
@@ -257,17 +257,17 @@
         "name": "yuika_01",
         "character": "yuika",
         "img": "yuika_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#ffcf3f",
-        "outstrokeColor": "#2D2D2D",
+        "fillColor": "#ffe41b",
+        "strokeColor": "#ffffff",
+        "outstrokeColor": "#e08446",
         "vertical": true,
         "defaultText": {
             "text": "天才？",
             "x": 55,
-            "y": 90,
-            "ls": 0,
+            "y": 110,
+            "ls": 2,
             "r": -2,
-            "s": 42
+            "s": 60
         }
     },
     {
@@ -329,9 +329,9 @@
         "name": "kaho_01",
         "character": "kaho",
         "img": "kaho_01.png",
-        "fillColor": "#ffffff",
-        "strokeColor": "#CE797D",
-        "outstrokeColor": "#2D2D2D",
+        "fillColor": "#d25f63",
+        "strokeColor": "#ffffff",
+        "outstrokeColor": "#4e3838",
         "vertical": true,
         "defaultText": {
             "text": "是大佬",
@@ -339,7 +339,7 @@
             "y": 100,
             "ls": 5,
             "r": -2,
-            "s": 55
+            "s": 60
         }
     },
     {
@@ -349,7 +349,7 @@
         "img": "chiyoko_01.png",
         "fillColor": "#FF99CB",
         "strokeColor": "#ffffff",
-        "outstrokeColor": "#FF99CB",
+        "outstrokeColor": "#9b4a75",
         "vertical": false,
         "defaultText": {
             "text": "我全都要",
