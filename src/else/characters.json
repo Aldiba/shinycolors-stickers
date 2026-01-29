@@ -1,9 +1,8 @@
 [
     {
-        "id": "0",
+        "id": "1",
         "name": "hazuki_01",
         "character": "hazuki",
-        "series": "sh",
         "img": "hazuki_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#48ab53",
@@ -19,10 +18,9 @@
         }
     },
     {
-        "id": "1",
+        "id": "2",
         "name": "hazuki_02",
         "character": "hazuki",
-        "series": "sh",
         "img": "hazuki_02.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4BB558",
@@ -38,10 +36,9 @@
         }
     },
     {
-        "id": "2",
+        "id": "3",
         "name": "hazuki_03",
         "character": "hazuki",
-        "series": "sh",
         "img": "hazuki_03.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4BB558",
@@ -57,10 +54,9 @@
         }
     },
     {
-        "id": "3",
+        "id": "25",
         "name": "mano_01",
         "character": "mano",
-        "series": "i",
         "img": "mano_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#EF9070",
@@ -76,13 +72,12 @@
         }
     },
     {
-        "id": "4",
+        "id": "26",
         "name": "mano_02",
         "character": "mano",
-        "series": "i",
         "img": "mano_02.png",
-        "fillColor": "#EF9070",
-        "strokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#EF9070",
         "outstrokeColor": "#865C46",
         "vertical": false,
         "defaultText": {
@@ -95,14 +90,13 @@
         }
     },
     {
-        "id": "5",
+        "id": "9",
         "name": "hiori_01",
         "character": "hiori",
-        "series": "i",
         "img": "hiori_01.png",
-        "fillColor": "#5ca0d0",
-        "strokeColor": "#ffffff",
-        "outstrokeColor": "#3D3D3D",
+        "fillColor": "#ffffff",
+        "strokeColor": "#368ecb",
+        "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
             "text": "吃了没",
@@ -114,13 +108,12 @@
         }
     },
     {
-        "id": "6",
+        "id": "10",
         "name": "hiori_02",
         "character": "hiori",
-        "series": "i",
         "img": "hiori_02.png",
-        "fillColor": "#368ecb",
-        "strokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#368ecb",
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
@@ -133,33 +126,31 @@
         }
     },
     {
-        "id": "7",
+        "id": "11",
         "name": "meguru_01",
         "character": "meguru",
-        "series": "i",
         "img": "meguru_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#B9515B",
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
-            "text": "LUV",
-            "x": 230,
-            "y": 100,
+            "text": "收心立",
+            "x": 220,
+            "y": 58,
             "ls": 0,
             "r": -2,
-            "s": 60
+            "s": 48
         }
     },
     {
-        "id": "8",
+        "id": "12",
         "name": "meguru_02",
         "character": "meguru",
-        "series": "i",
         "img": "meguru_02.png",
-        "fillColor": "#ffc832",
-        "strokeColor": "#ffffff",
-        "outstrokeColor": "#7a5432",
+        "fillColor": "#ffffff",
+        "strokeColor": "#eb8a35",
+        "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
             "text": "收到！",
@@ -171,10 +162,9 @@
         }
     },
     {
-        "id": "9",
+        "id": "29",
         "name": "kogane_01",
         "character": "kogane",
-        "series": "l",
         "img": "kogane_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#9E8683",
@@ -190,10 +180,9 @@
         }
     },
     {
-        "id": "10",
+        "id": "30",
         "name": "kogane_02",
         "character": "kogane",
-        "series": "l",
         "img": "kogane_02.png",
         "fillColor": "#FD36B3",
         "strokeColor": "#2D2D2D",
@@ -209,10 +198,9 @@
         }
     },
     {
-        "id": "11",
+        "id": "4",
         "name": "mamimi_01",
         "character": "mamimi",
-        "series": "l",
         "img": "mamimi_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#a338eb",
@@ -228,10 +216,9 @@
         }
     },
     {
-        "id": "12",
+        "id": "5",
         "name": "kiriko_01",
         "character": "kiriko",
-        "series": "l",
         "img": "kiriko_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e962a1",
@@ -246,14 +233,14 @@
             "s": 55
         }
     },
+    
     {
-        "id": "13",
+        "id": "7",
         "name": "sakuya_01",
         "character": "sakuya",
-        "series": "l",
         "img": "sakuya_01.png",
-        "fillColor": "#f0d018",
-        "strokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#f0d018",
         "outstrokeColor": "#2D2D2D",
         "vertical": false,
         "defaultText": {
@@ -269,26 +256,24 @@
         "id": "14",
         "name": "yuika_01",
         "character": "yuika",
-        "series": "l",
         "img": "yuika_01.png",
-        "fillColor": "#ffe41b",
-        "strokeColor": "#ffffff",
-        "outstrokeColor": "#e08446",
+        "fillColor": "#ffffff",
+        "strokeColor": "#ffcf3f",
+        "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
             "text": "天才？",
             "x": 55,
-            "y": 110,
-            "ls": 2,
+            "y": 90,
+            "ls": 0,
             "r": -2,
-            "s": 60
+            "s": 42
         }
     },
     {
-        "id": "15",
+        "id": "16",
         "name": "amana_01",
         "character": "amana",
-        "series": "a",
         "img": "amana_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#FF3A7B",
@@ -304,10 +289,9 @@
         }
     },
     {
-        "id": "16",
+        "id": "8",
         "name": "tenka_01",
         "character": "tenka",
-        "series": "a",
         "img": "tenka_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#ff623b",
@@ -323,10 +307,9 @@
         }
     },
     {
-        "id": "17",
+        "id": "21",
         "name": "chiyuki_01",
         "character": "chiyuki",
-        "series": "a",
         "img": "chiyuki_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e94661",
@@ -342,33 +325,31 @@
         }
     },
     {
-        "id": "18",
+        "id": "24",
         "name": "kaho_01",
         "character": "kaho",
-        "series": "h",
         "img": "kaho_01.png",
-        "fillColor": "#d25f63",
-        "strokeColor": "#ffffff",
-        "outstrokeColor": "#4e3838",
+        "fillColor": "#ffffff",
+        "strokeColor": "#CE797D",
+        "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
             "text": "是大佬",
             "x": 58,
             "y": 100,
-            "ls": 3,
+            "ls": 5,
             "r": -2,
-            "s": 67
+            "s": 55
         }
     },
     {
-        "id": "19",
+        "id": "17",
         "name": "chiyoko_01",
         "character": "chiyoko",
-        "series": "h",
         "img": "chiyoko_01.png",
         "fillColor": "#FF99CB",
         "strokeColor": "#ffffff",
-        "outstrokeColor": "#9b4a75",
+        "outstrokeColor": "#FF99CB",
         "vertical": false,
         "defaultText": {
             "text": "我全都要",
@@ -380,10 +361,9 @@
         }
     },
     {
-        "id": "20",
+        "id": "23",
         "name": "juri_01",
         "character": "juri",
-        "series": "h",
         "img": "juri_01.png",
         "fillColor": "#F8E09D",
         "strokeColor": "#6E4F45",
@@ -399,10 +379,9 @@
         }
     },
     {
-        "id": "21",
+        "id": "13",
         "name": "natsuha_01",
         "character": "natsuha",
-        "series": "h",
         "img": "natsuha_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#E56450",
@@ -417,11 +396,11 @@
             "s": 48
         }
     },
+    
     {
-        "id": "22",
+        "id": "28",
         "name": "rinze_01",
         "character": "rinze",
-        "series": "h",
         "img": "rinze_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#575E7C",
@@ -437,32 +416,30 @@
         }
     },
     {
-        "id": "23",
+        "id": "15",
         "name": "asahi_01",
         "character": "asahi",
-        "series": "s",
         "img": "asahi_01.png",
         "fillColor": "#FFFFFF",
         "strokeColor": "#6498ff",
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
-            "text": "发现",
-            "x": 50,
-            "y": 120,
-            "ls": 4,
+            "text": "求此虫冷知识",
+            "x": 30,
+            "y": 40,
+            "ls": 0,
             "r": -2,
-            "s": 80
+            "s": 42
         }
     },
     {
-        "id": "24",
+        "id": "22",
         "name": "fuyuko_01",
         "character": "fuyuko",
-        "series": "s",
         "img": "fuyuko_01.png",
-        "fillColor": "#FC8ABA",
-        "strokeColor": "#ffffff",
+        "fillColor": "#ffffff",
+        "strokeColor": "#FC8ABA",
         "outstrokeColor": "#2D2D2D",
         "vertical": true,
         "defaultText": {
@@ -475,10 +452,9 @@
         }
     },
     {
-        "id": "25",
+        "id": "6",
         "name": "mei_01",
         "character": "mei",
-        "series": "s",
         "img": "mei_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#ff8800",
@@ -494,10 +470,9 @@
         }
     },
     {
-        "id": "26",
+        "id": "33",
         "name": "hinana_01",
         "character": "hinana",
-        "series": "n",
         "img": "hinana_01.png",
         "fillColor": "#ffffff",
         "strokeColor": "#f39f37",
@@ -513,10 +488,9 @@
         }
     },
     {
-        "id": "27",
+        "id": "34",
         "name": "hinana_02",
         "character": "hinana",
-        "series": "n",
         "img": "hinana_02.png",
         "fillColor": "#ffffff",
         "strokeColor": "#f39f37",
@@ -532,10 +506,9 @@
         }
     },
     {
-        "id": "28",
+        "id": "36",
         "name": "toru_0",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-0_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -551,10 +524,9 @@
         }
     },
     {
-        "id": "29",
+        "id": "37",
         "name": "toru_1",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-1_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -570,10 +542,9 @@
         }
     },
     {
-        "id": "30",
+        "id": "38",
         "name": "toru_2",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-2_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -589,10 +560,9 @@
         }
     },
     {
-        "id": "31",
+        "id": "39",
         "name": "toru_3",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-3_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -608,10 +578,9 @@
         }
     },
     {
-        "id": "32",
+        "id": "40",
         "name": "toru_4",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-4_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -627,10 +596,9 @@
         }
     },
     {
-        "id": "33",
+        "id": "41",
         "name": "toru_5",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-5_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -646,10 +614,9 @@
         }
     },
     {
-        "id": "34",
+        "id": "42",
         "name": "toru_6",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-6_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -665,10 +632,9 @@
         }
     },
     {
-        "id": "35",
+        "id": "43",
         "name": "toru_7",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-7_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -684,10 +650,9 @@
         }
     },
     {
-        "id": "36",
+        "id": "44",
         "name": "toru_8",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-8_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -703,10 +668,9 @@
         }
     },
     {
-        "id": "37",
+        "id": "45",
         "name": "toru_9",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-10_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#29b1e3",
@@ -722,10 +686,9 @@
         }
     },
     {
-        "id": "38",
+        "id": "46",
         "name": "toru_10",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-11_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#65F4FF",
@@ -741,10 +704,9 @@
         }
     },
     {
-        "id": "39",
+        "id": "47",
         "name": "toru_11",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-12_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#65F4FF",
@@ -760,10 +722,9 @@
         }
     },
     {
-        "id": "40",
+        "id": "48",
         "name": "toru_12",
         "character": "toru",
-        "series": "n",
         "img": "asakuratoru-13_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#65F4FF",
@@ -779,10 +740,9 @@
         }
     },
     {
-        "id": "41",
+        "id": "49",
         "name": "madoka_0",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-0_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -798,10 +758,9 @@
         }
     },
     {
-        "id": "42",
+        "id": "50",
         "name": "madoka_1",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-1_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -817,10 +776,9 @@
         }
     },
     {
-        "id": "43",
+        "id": "51",
         "name": "madoka_2",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-2_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -836,10 +794,9 @@
         }
     },
     {
-        "id": "44",
+        "id": "52",
         "name": "madoka_3",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-3_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -855,10 +812,9 @@
         }
     },
     {
-        "id": "45",
+        "id": "53",
         "name": "madoka_4",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-4_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -874,10 +830,9 @@
         }
     },
     {
-        "id": "46",
+        "id": "54",
         "name": "madoka_5",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-5_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -893,10 +848,9 @@
         }
     },
     {
-        "id": "47",
+        "id": "55",
         "name": "madoka_6",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-6_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -912,10 +866,9 @@
         }
     },
     {
-        "id": "48",
+        "id": "56",
         "name": "madoka_7",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-7_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -931,10 +884,9 @@
         }
     },
     {
-        "id": "49",
+        "id": "57",
         "name": "madoka_8",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-8_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -950,10 +902,9 @@
         }
     },
     {
-        "id": "50",
+        "id": "58",
         "name": "madoka_9",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-10_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -969,10 +920,9 @@
         }
     },
     {
-        "id": "51",
+        "id": "59",
         "name": "madoka_10",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-11_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -988,10 +938,9 @@
         }
     },
     {
-        "id": "52",
+        "id": "60",
         "name": "madoka_11",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-12_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -1007,10 +956,9 @@
         }
     },
     {
-        "id": "53",
+        "id": "61",
         "name": "madoka_12",
         "character": "madoka",
-        "series": "n",
         "img": "higuchimadoka-13_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#be1e3e",
@@ -1026,10 +974,9 @@
         }
     },
     {
-        "id": "54",
+        "id": "62",
         "name": "hinana_0",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-0_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1045,10 +992,9 @@
         }
     },
     {
-        "id": "55",
+        "id": "63",
         "name": "hinana_1",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-1_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1064,10 +1010,9 @@
         }
     },
     {
-        "id": "56",
+        "id": "64",
         "name": "hinana_2",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-2_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1083,10 +1028,9 @@
         }
     },
     {
-        "id": "57",
+        "id": "65",
         "name": "hinana_3",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-3_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1102,10 +1046,9 @@
         }
     },
     {
-        "id": "58",
+        "id": "66",
         "name": "hinana_4",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-4_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1121,10 +1064,9 @@
         }
     },
     {
-        "id": "59",
+        "id": "67",
         "name": "hinana_5",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-5_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1140,10 +1082,9 @@
         }
     },
     {
-        "id": "60",
+        "id": "68",
         "name": "hinana_6",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-6_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1159,10 +1100,9 @@
         }
     },
     {
-        "id": "61",
+        "id": "69",
         "name": "hinana_7",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-7_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1178,10 +1118,9 @@
         }
     },
     {
-        "id": "62",
+        "id": "70",
         "name": "hinana_8",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-8_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1197,10 +1136,9 @@
         }
     },
     {
-        "id": "63",
+        "id": "71",
         "name": "hinana_9",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-10_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1216,10 +1154,9 @@
         }
     },
     {
-        "id": "64",
+        "id": "72",
         "name": "hinana_10",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-11_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1235,10 +1172,9 @@
         }
     },
     {
-        "id": "65",
+        "id": "73",
         "name": "hinana_11",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-12_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1254,10 +1190,9 @@
         }
     },
     {
-        "id": "66",
+        "id": "74",
         "name": "hinana_12",
         "character": "hinana",
-        "series": "n",
         "img": "ichikawahinana-13_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#e39c4a",
@@ -1273,10 +1208,9 @@
         }
     },
     {
-        "id": "67",
+        "id": "75",
         "name": "koito_0",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-0_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1292,10 +1226,9 @@
         }
     },
     {
-        "id": "68",
+        "id": "76",
         "name": "koito_1",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-1_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1311,10 +1244,9 @@
         }
     },
     {
-        "id": "69",
+        "id": "77",
         "name": "koito_2",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-2_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1330,10 +1262,9 @@
         }
     },
     {
-        "id": "70",
+        "id": "78",
         "name": "koito_3",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-3_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1349,10 +1280,9 @@
         }
     },
     {
-        "id": "71",
+        "id": "79",
         "name": "koito_4",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-4_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1361,17 +1291,16 @@
         "defaultText": {
             "text": "赢啦赢啦",
             "x": 70,
-            "y": 50,
+            "y": 250,
             "ls": 0,
             "r": 0,
             "s": 50
         }
     },
     {
-        "id": "72",
+        "id": "80",
         "name": "koito_5",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-5_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1387,10 +1316,9 @@
         }
     },
     {
-        "id": "73",
+        "id": "81",
         "name": "koito_6",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-6_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1406,10 +1334,9 @@
         }
     },
     {
-        "id": "74",
+        "id": "82",
         "name": "koito_7",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-7_1.png",
         "fillColor": "#D86A85",
         "strokeColor": "#2D2D2D",
@@ -1425,10 +1352,9 @@
         }
     },
     {
-        "id": "75",
+        "id": "83",
         "name": "koito_8",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-8_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1444,10 +1370,9 @@
         }
     },
     {
-        "id": "76",
+        "id": "84",
         "name": "koito_9",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-10_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1463,10 +1388,9 @@
         }
     },
     {
-        "id": "77",
+        "id": "85",
         "name": "koito_10",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-11_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1482,10 +1406,9 @@
         }
     },
     {
-        "id": "78",
+        "id": "86",
         "name": "koito_11",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-12_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",
@@ -1501,10 +1424,9 @@
         }
     },
     {
-        "id": "79",
+        "id": "87",
         "name": "koito_12",
         "character": "koito",
-        "series": "n",
         "img": "fukumarukoito-13_1.png",
         "fillColor": "#ffffff",
         "strokeColor": "#4C4B6A",

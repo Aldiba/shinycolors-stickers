@@ -14,6 +14,9 @@ const locales = {
       "simple_mode": "简化模式",
       "advanced_mode": "高级模式",
       "language": "语言",
+
+      "tab_settings": "文字设置",
+      "tab_colors": "颜色设置",
   
       // 设置项 Label
       "text": "文字",
@@ -21,29 +24,44 @@ const locales = {
       "inner_stroke": "内描边",
       "outer_stroke": "外描边",
       "rotate": "旋转",
-      "font_size": "字体大小",
+      "font_size": "大小",
       "vertical": "竖排",
-      "text_on_top": "文字置顶",
+      "text_on_top": "置顶",
       "line_spacing": "行间距",
       "letter_spacing": "字间距",
       
       // Curve Section
-      "curve_effect": "弧度效果",
-      "curve": "弧度",
-      "curve_factor": "弧度强度",
+      "curve_effect": "曲线效果",
+      "curve": "曲线",
+      "curve_factor": "曲线强度",
   
       // Wobbly Section
-      "wobbly_effect": "随机化",
+      "wobbly_effect": "随机效果",
       "wobbly": "随机化",
       "seed": "种子",
       "new_seed": "新种子",
-      "scale_chaos": "大小混乱",
-      "rotate_chaos": "旋转混乱",
+      "scale_chaos": "大小",
+      "rotate_chaos": "旋转",
   
       // 颜色选择器
       "fill_color": "填充颜色",
       "inner_stroke_color": "内描边颜色",
       "outer_stroke_color": "外描边颜色",
+
+      // 角色选择器
+      "pick_character": "选择角色",
+      "select_character": "选择角色",
+      "search_placeholder": "搜索角色名...",
+      "no_character_found": "未找到相关角色",
+      "showing": "显示",
+      "of": "/",
+      "characters_count": "个角色",
+
+      "about_title": "关于",
+      "credits_title": "贡献者",
+      "source_code_title": "源代码",
+      "total_stickers_made": "已生成的表情包总数",
+      "close": "关闭",
     },
     en: {
       // General
@@ -59,6 +77,9 @@ const locales = {
       "simple_mode": "Simple Mode",
       "advanced_mode": "Advanced Mode",
       "language": "Language",
+
+      "tab_settings": "Text",
+      "tab_colors": "Color",
   
       // Setting Labels
       "text": "Text",
@@ -68,7 +89,7 @@ const locales = {
       "rotate": "Rotate",
       "font_size": "Font Size",
       "vertical": "Vertical",
-      "text_on_top": "Text on Top",
+      "text_on_top": "Top",
       "line_spacing": "Line Spacing",
       "letter_spacing": "Letter Spacing",
   
@@ -78,17 +99,32 @@ const locales = {
       "curve_factor": "Curve Factor",
   
       // Wobbly Section
-      "wobbly_effect": "Wobbly Effect",
-      "wobbly": "Wobbly",
+      "wobbly_effect": "Random Effect",
+      "wobbly": "Random",
       "seed": "Seed",
       "new_seed": "New Seed",
-      "scale_chaos": "Scale Chaos",
-      "rotate_chaos": "Rotate Chaos",
+      "scale_chaos": "Scale",
+      "rotate_chaos": "Rotate",
   
       // Color Pickers
       "fill_color": "Fill Color",
       "inner_stroke_color": "Inner Stroke Color",
       "outer_stroke_color": "Outer Stroke Color",
+
+      // 角色选择器
+      "pick_character": "Pick Character",
+      "select_character": "Select Character",
+      "search_placeholder": "Search by name...",
+      "no_character_found": "No character found",
+      "showing": "Showing",
+      "of": "of",
+      "characters_count": "characters",
+
+      "about_title": "About",
+      "credits_title": "Credits",
+      "source_code_title": "Source Code",
+      "total_stickers_made": "Total Stickers Created",
+      "close": "Close",
     },
     ja: {
       // General
@@ -104,6 +140,9 @@ const locales = {
       "simple_mode": "簡易モード",
       "advanced_mode": "詳細モード",
       "language": "言語",
+
+      "tab_settings": "文設定",
+      "tab_colors": "色設定",
   
       // Setting Labels
       "text": "テキスト",
@@ -111,11 +150,11 @@ const locales = {
       "inner_stroke": "内側ストローク",
       "outer_stroke": "外側ストローク",
       "rotate": "回転",
-      "font_size": "フォントサイズ",
-      "vertical": "縦書き",
-      "text_on_top": "テキストを前面に",
+      "font_size": "大小",
+      "vertical": "縦書",
+      "text_on_top": "字前",
       "line_spacing": "行間",
-      "letter_spacing": "文字間隔",
+      "letter_spacing": "字間",
   
       // Curve Section
       "curve_effect": "カーブ効果",
@@ -123,17 +162,32 @@ const locales = {
       "curve_factor": "カーブ強度",
   
       // Wobbly Section
-      "wobbly_effect": "ぐにゃ効果",
-      "wobbly": "ぐにゃ",
+      "wobbly_effect": "ランダム効果",
+      "wobbly": "ランダム",
       "seed": "シード",
       "new_seed": "新しいシード",
-      "scale_chaos": "スケール度",
-      "rotate_chaos": "回転度",
+      "scale_chaos": "大小",
+      "rotate_chaos": "回転",
   
       // Color Pickers
       "fill_color": "塗りつぶし色",
       "inner_stroke_color": "内側ストローク色",
       "outer_stroke_color": "外側ストローク色",
+
+      // 角色选择器
+      "pick_character": "キャラを選ぶ",
+      "select_character": "キャラクター選択",
+      "search_placeholder": "名前で検索...",
+      "no_character_found": "見つかりませんでした",
+      "showing": "表示中:",
+      "of": "/",
+      "characters_count": "キャラ",
+
+      "about_title": "アプリについて",
+      "credits_title": "クレジット",
+      "source_code_title": "ソースコード",
+      "total_stickers_made": "作成されたスタンプ総数",
+      "close": "閉じる",
     },
   };
   

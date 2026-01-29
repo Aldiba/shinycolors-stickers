@@ -1,204 +1,151 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: caramellatte --default, prism;
+}
+
+
+
+@plugin "daisyui/theme" {
+  name: "prism";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0 0);
+  --color-base-200: oklch(92% 0.004 286.32);
+  --color-base-300: oklch(71% 0.203 305.504);
+  --color-base-content: oklch(19.742% 0.004 123.72);
+  --color-primary: oklch(49% 0.27 292.581);
+  --color-primary-content: oklch(98% 0.001 106.423);
+  --color-secondary: oklch(77.75% 0.196 111.09);
+  --color-secondary-content: oklch(15.55% 0.039 111.09);
+  --color-accent: oklch(85.39% 0.201 100.73);
+  --color-accent-content: oklch(17.078% 0.04 100.73);
+  --color-neutral: oklch(51% 0.262 276.966);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(86.19% 0.047 224.14);
+  --color-info-content: oklch(17.238% 0.009 224.14);
+  --color-success: oklch(86.19% 0.047 157.85);
+  --color-success-content: oklch(17.238% 0.009 157.85);
+  --color-warning: oklch(64% 0.222 41.116);
+  --color-warning-content: oklch(98% 0.022 95.277);
+  --color-error: oklch(57% 0.245 27.325);
+  --color-error-content: oklch(98% 0.002 247.839);
+  --radius-selector: 2rem;
+  --radius-field: 1rem;
+  --radius-box: 2rem;
+  --size-selector: 0.21875rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 0;
+}
+
 .App {
-  text-align: center;
+  @apply text-center min-h-screen bg-base-100 text-base-content;
 }
 
 .container {
-  padding: 2rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col items-center justify-center p-8 max-w-5xl mx-auto gap-8;
+}
+
+.canvas-wrapper {
+  @apply shadow-xl rounded-box overflow-hidden bg-white border border-base-300;
 }
 
 .canvas {
   height: 256px;
   width: 296px;
-  border: 1px solid #ddd;
 }
 
+/* Vertical layout container for canvas and side controls */
 .vertical {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 256px;
+  @apply flex flex-row justify-center items-center gap-4 bg-base-200 p-6 rounded-box shadow-md;
+}
+
+.vertical-controls {
+  @apply bg-base-100 rounded-box p-2 shadow-sm border border-base-200 h-64 flex flex-row items-center w-20 shrink-0;
 }
 
 .horizontal {
-  width: 296px;
-  /* margin-left: -30px; */
-
+  @apply w-full max-w-150 flex flex-col gap-6;
 }
 
 .slider-horizontal {
-  margin-left: -30px;
+  @apply w-full;
 }
 
+/* Text input and font selector row */
 .text_react {
-  display: flex;
-  gap: 16px; 
+  @apply flex gap-4 w-full flex-col sm:flex-row;
 }
-.text_react .MuiFormControl-root {
-  min-width: 10rem; 
-  flex-grow: 1; 
-  flex-basis: 0; 
-}
-.text_react .MuiTextField-root {
-  min-width: 17rem; 
-  flex-grow: 1; 
-  flex-basis: 0; 
-}
+
+/* Settings section containing sliders */
 .settings {
-  color: black;
-  font-family: "YurukaStd";
-  margin: 1.5rem 0 1.5rem 0;
+  @apply flex flex-col gap-6 w-full;
 }
 
 .settings > div {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  @apply flex flex-col sm:flex-row items-center gap-4 w-full;
 }
 
-.text {
-  margin-bottom: 1rem;
+.settings label {
+  @apply font-bold whitespace-nowrap min-w-24;
+}
+
+/* Color pickers container */
+.color-pickers-container {
+  @apply flex flex-wrap justify-center gap-4 p-4 bg-base-200 rounded-box shadow-sm mt-4;
+}
+
+.color-picker-item, .color-picker-item2, .color-picker-item3 {
+  @apply flex flex-col items-center gap-2;
+}
+
+/* Image picker area */
+.img-loader-container {
+  @apply w-full flex flex-col items-center gap-4 p-6 bg-base-200 rounded-box shadow-sm;
 }
 
 .picker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  @apply w-full flex justify-center;
 }
 
-.modal > .MuiPopover-paper {
-  overflow: hidden;
+.upload-container {
+  @apply flex flex-wrap justify-center gap-2 items-center w-full;
 }
 
-.picker-search {
-  margin: 0.5rem;
-}
-
-.image-grid-wrapper {
-  overflow: auto;
-}
-
-.image-grid {
-  margin: 0.5rem;
-  border-radius: 0.25rem;
-}
-
+/* Action buttons */
 .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  @apply flex flex-wrap justify-center gap-4 mt-4;
 }
 
 .footer {
-  margin-top: 2rem;
-  font-family: "YurukaStd";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @apply mt-8 flex flex-col items-center justify-center;
 }
 
-/* .footer > a {
-  color: rgb(199, 199, 199);
-  text-decoration: none;
-  margin-bottom: 0.5rem;
+.counter {
+  @apply absolute top-4 right-4 flex items-center gap-2 bg-base-100 p-2 rounded-lg shadow-sm z-10 opacity-90 hover:opacity-100 transition-opacity;
 }
 
-.footer > a:hover {
-  color: rgb(255, 255, 255);
-} */
-
-.strokesize {
-  padding: 0rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 3rem;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
-}
-
-.normal {
-  min-width: 300px; 
-  align-items: center;
-  justify-content: center;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
-}
-.normal .MuiFormControl-root {
-  min-width: 150px; 
-  flex-grow: 1; 
-  flex-basis: 0; 
-}
-
-.linesetting {
-  
-  padding: 0rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 3rem;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
-
-}
-
-/* .imgpicker {
-  
-  padding: 0rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 3rem;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
-
-} */
-
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: white;
-  border-radius: 1rem;
+  @apply bg-primary rounded-full;
   min-height: 2rem;
 }
 
-.counter {
-  left: 0;
-  top: 0;
-  text-align: left;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
+::-webkit-scrollbar-track {
+  @apply bg-base-200;
 }
 
-.color-pickers-container {
-  padding: 1rem;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 2rem;
-  color: black;
-  font-weight: bold;
-  font-family: YurukaStd;
-  
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
-
-.img-loader-container {
-  align-items: center;
-  justify-content: center;
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
 }

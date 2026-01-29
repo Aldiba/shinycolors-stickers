@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import "../index.css";
 
 const Canvas = (props) => {
   const { draw, spaceSize, ...rest } = props;
